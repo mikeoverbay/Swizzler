@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "! WoT Texture Swizzler", "! WoT Texture Swizzler\! WoT Texture Swizzler.vbproj", "{04ACD19D-F004-490A-A8FC-6D756DFED5AC}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Swizzler_Setup", "Swizzler_Setup\Swizzler_Setup.vdproj", "{793C2E08-F182-4525-A128-E04F2F9C3928}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04ACD19D-F004-490A-A8FC-6D756DFED5AC}.Debug|x86.ActiveCfg = Debug|x86
+		{04ACD19D-F004-490A-A8FC-6D756DFED5AC}.Debug|x86.Build.0 = Debug|x86
+		{04ACD19D-F004-490A-A8FC-6D756DFED5AC}.Release|x86.ActiveCfg = Release|x86
+		{04ACD19D-F004-490A-A8FC-6D756DFED5AC}.Release|x86.Build.0 = Release|x86
+		{793C2E08-F182-4525-A128-E04F2F9C3928}.Debug|x86.ActiveCfg = Debug
+		{793C2E08-F182-4525-A128-E04F2F9C3928}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
