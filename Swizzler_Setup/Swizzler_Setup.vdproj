@@ -160,25 +160,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A93159CDB96817D6716351C718B1BB6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A991C897B61FA7B3E500178D86CF03AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,7 +172,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
+        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A991C897B61FA7B3E500178D86CF03AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7A93159CDB96817D6716351C718B1BB6"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -358,7 +358,7 @@
             "SourcePath" = "8:..\\! WoT Texture Swizzler\\shaders\\maskGen_vertex.glsl"
             "TargetName" = "8:maskGen_vertex.glsl"
             "Tag" = "8:"
-            "Folder" = "8:_2BCFD5A8EB1349B48B651D421E09CD63"
+            "Folder" = "8:_3823468D8099439DBD251216BA3127CF"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -440,6 +440,11 @@
             "AssemblyAsmDisplayName" = "8:SlimDX, Version=2.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_7A93159CDB96817D6716351C718B1BB6"
+                    {
+                    "Name" = "8:SlimDX.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:SlimDX.dll"
             "TargetName" = "8:"
@@ -544,7 +549,7 @@
             "SourcePath" = "8:..\\! WoT Texture Swizzler\\shaders\\maskGen_fragment.glsl"
             "TargetName" = "8:maskGen_fragment.glsl"
             "Tag" = "8:"
-            "Folder" = "8:_2BCFD5A8EB1349B48B651D421E09CD63"
+            "Folder" = "8:_3823468D8099439DBD251216BA3127CF"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -586,6 +591,11 @@
             "AssemblyAsmDisplayName" = "8:Tao.OpenGl, Version=2.1.0.12, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_A6354193EFF508F898EBA691E620B7AF"
+                    {
+                    "Name" = "8:Tao.OpenGl.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Tao.OpenGl.dll"
             "TargetName" = "8:"
@@ -612,6 +622,11 @@
             "AssemblyAsmDisplayName" = "8:Tao.DevIl, Version=1.6.8.3, Culture=neutral, PublicKeyToken=7ec4053013524957, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_A991C897B61FA7B3E500178D86CF03AB"
+                    {
+                    "Name" = "8:Tao.DevIl.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Tao.DevIl.dll"
             "TargetName" = "8:"
@@ -638,6 +653,11 @@
             "AssemblyAsmDisplayName" = "8:FastColoredTextBox, Version=2.16.11.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_CC7B016703EA290B24673BA9E63BE59A"
+                    {
+                    "Name" = "8:FastColoredTextBox.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:FastColoredTextBox.dll"
             "TargetName" = "8:"
@@ -664,6 +684,11 @@
             "AssemblyAsmDisplayName" = "8:Tao.FreeGlut, Version=2.4.0.2, Culture=neutral, PublicKeyToken=6e602a6ad6c0d06d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_CE2057D825CFCB96D4697E055949347A"
+                    {
+                    "Name" = "8:Tao.FreeGlut.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Tao.FreeGlut.dll"
             "TargetName" = "8:"
@@ -730,6 +755,11 @@
             "AssemblyAsmDisplayName" = "8:Tao.Platform.Windows, Version=1.0.0.5, Culture=neutral, PublicKeyToken=701104b2da67a104, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_F95FB012C8F9BB67B2896771B880C4D8"
+                    {
+                    "Name" = "8:Tao.Platform.Windows.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Tao.Platform.Windows.dll"
             "TargetName" = "8:"
@@ -839,7 +869,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Swizzler"
         "ProductCode" = "8:{B14059A5-DC5C-45A9-894F-BD785596778C}"
-        "PackageCode" = "8:{7F2F1C97-F32A-4240-A8B4-FA77228AAECC}"
+        "PackageCode" = "8:{DB714CEE-5C79-4288-B070-EF14A4AD751B}"
         "UpgradeCode" = "8:{2F5CB7E8-E9B8-4311-B488-091FA5184B6E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
