@@ -6,7 +6,8 @@ Imports Tao.Platform.Windows
 Module GL_ShaderLoader
     Public color_pgm As Integer
     Public swizzler_pgm As Integer
-
+    Public maskgen_pgm As Integer
+    Public mg_color As Integer
     Public alpha As UInteger = 0
     Public c_address1, n_address1, l_address1 As Integer
     Public anm_n_address1, anm_l_address1, anm_cam_pos2 As Integer
@@ -21,7 +22,7 @@ Module GL_ShaderLoader
     Public s_textureV As Integer
     Public s_textureH As Integer
     Public shadowMap, color_in, color_out As Integer
-    Public r_mask, b_mask, g_mask, a_mask, preserve_, convert_rgb_NM, sw_alpha_value, sw_use_alpha_fill, sw_multiply As Integer
+    Public r_mask, b_mask, g_mask, a_mask, convert_rgb_NM, sw_alpha_value, sw_use_alpha_fill, sw_multiply As Integer
     Public sw_mask_location As Integer
     Public sw_mask_function As Integer
     Public sw_use_mask As Integer
@@ -43,6 +44,10 @@ Module GL_ShaderLoader
         Dim fs9() As String = {New StreamReader(ap + "swizzler_fragment.glsl").ReadToEnd}
         swizzler_pgm = build_shader(vs9, fs9, swizzler_pgm, "swizzler_pgm")
 
+        Dim vs1() As String = {New StreamReader(ap + "maskGen_vertex.glsl").ReadToEnd}
+        Dim fs1() As String = {New StreamReader(ap + "maskGen_fragment.glsl").ReadToEnd}
+        maskgen_pgm = build_shader(vs1, fs1, maskgen_pgm, "maskgen_pgm")
+
         Gl.glFinish() '<-- Make sure all shaders are done compiling. Not sure this is a real issue.
 
         '/////////////////////
@@ -51,6 +56,7 @@ Module GL_ShaderLoader
         c_address = Gl.glGetUniformLocation(color_pgm, "colorMap")
         mask = Gl.glGetUniformLocation(color_pgm, "mask")
 
+        mg_color = Gl.glGetUniformLocation(maskgen_pgm, "colorMap")
 
         color_in = Gl.glGetUniformLocation(swizzler_pgm, "colorMap_in")
         color_out = Gl.glGetUniformLocation(swizzler_pgm, "colorMap_out")
@@ -58,7 +64,6 @@ Module GL_ShaderLoader
         g_mask = Gl.glGetUniformLocation(swizzler_pgm, "g_mask")
         b_mask = Gl.glGetUniformLocation(swizzler_pgm, "b_mask")
         a_mask = Gl.glGetUniformLocation(swizzler_pgm, "a_mask")
-        preserve_ = Gl.glGetUniformLocation(swizzler_pgm, "preserve")
         convert_rgb_NM = Gl.glGetUniformLocation(swizzler_pgm, "convert_RGB_NM")
         sw_alpha_value = Gl.glGetUniformLocation(swizzler_pgm, "alpha_value")
         sw_use_alpha_fill = Gl.glGetUniformLocation(swizzler_pgm, "use_alpha_fill")

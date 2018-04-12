@@ -349,7 +349,14 @@ Public Class frmMain
         p3 = L + S
         p4 = L
         p4.Y += S.Y
-
+        If GenMask_cb.Checked Then
+            Gl.glEnable(Gl.GL_BLEND)
+            Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA)
+            Gl.glUseProgram(0)
+            Gl.glUseProgram(maskgen_pgm)
+            Gl.glUniform1i(mg_color, 0)
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
+        End If
         'draw and flip bufffers so the user can see the image
         Gl.glBegin(Gl.GL_QUADS)
         '---
@@ -699,59 +706,61 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Gl.glDisable(Gl.GL_BLEND)
         Gl.glDisable(Gl.GL_LIGHTING)
         Gl.glEnable(Gl.GL_TEXTURE_2D)
+        If Not GenMask_cb.CheckAlign Then
+            ' use swizzler
+            Gl.glUseProgram(swizzler_pgm)
 
-        Gl.glUseProgram(swizzler_pgm)
+            Gl.glUniform1i(color_in, 0)
+            Gl.glUniform1i(color_out, 1)
+            Gl.glUniform1i(sw_mask_location, 2)
+            Gl.glUniform1i(r_mask, R_)
+            Gl.glUniform1i(g_mask, G_)
+            Gl.glUniform1i(b_mask, B_)
+            Gl.glUniform1i(a_mask, A_)
+            Gl.glUniform1i(sw_mask_function, mask_function)
+            Gl.glUniform1f(sw_mask_mix, CSng(TrackBar1.Value / 100.0!))
+            Gl.glUniform1i(sw_blend_alpha, use_alpha_blend)
+            If convert_rgb_NM_cb.Checked Then
+                Gl.glUniform1i(convert_rgb_NM, 1)
+            Else
+                Gl.glUniform1i(convert_rgb_NM, 0)
+            End If
 
-        Gl.glUniform1i(color_in, 0)
-        Gl.glUniform1i(color_out, 1)
-        Gl.glUniform1i(sw_mask_location, 2)
-        Gl.glUniform1i(r_mask, R_)
-        Gl.glUniform1i(g_mask, G_)
-        Gl.glUniform1i(b_mask, B_)
-        Gl.glUniform1i(a_mask, A_)
-        Gl.glUniform1i(sw_mask_function, mask_function)
-        Gl.glUniform1f(sw_mask_mix, CSng(TrackBar1.Value / 100.0!))
-        Gl.glUniform1i(sw_blend_alpha, use_alpha_blend)
-        If convert_rgb_NM_cb.Checked Then
-            Gl.glUniform1i(convert_rgb_NM, 1)
+            If mask_cb.Checked Then
+                Gl.glUniform1i(sw_use_mask, 1)
+                Gl.glUniform1i(sw_mask_channels, mask_value)
+
+            Else
+                Gl.glUniform1i(sw_use_mask, 0)
+            End If
+            If fill_alpha_cb.Checked Then
+                Gl.glUniform1i(sw_use_alpha_fill, 1)
+                Gl.glUniform1f(sw_alpha_value, alpha_percent)
+
+            Else
+                Gl.glUniform1i(sw_use_alpha_fill, 0)
+            End If
+            If multiply_cb.Checked Then
+                Gl.glUniform1i(sw_multiply, 1)
+            Else
+                Gl.glUniform1i(sw_multiply, 0)
+            End If
+
+            e = Gl.glGetError
+            Gl.glActiveTexture(Gl.GL_TEXTURE0)
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
+            Gl.glActiveTexture(Gl.GL_TEXTURE0 + 1)
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image2)
+            Gl.glActiveTexture(Gl.GL_TEXTURE0 + 2)
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, mask_texture)
+
         Else
-            Gl.glUniform1i(convert_rgb_NM, 0)
+            ' use maskgen_pgm pgm
+            Gl.glUseProgram(maskgen_pgm)
+            Gl.glActiveTexture(Gl.GL_TEXTURE0)
+            Gl.glUniform1i(mg_color, 0)
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
         End If
-
-        If preserver_cb.Checked Then
-            Gl.glUniform1i(preserve_, 1)
-        Else
-            Gl.glUniform1i(preserve_, 0)
-        End If
-
-        If mask_cb.Checked Then
-            Gl.glUniform1i(sw_use_mask, 1)
-            Gl.glUniform1i(sw_mask_channels, mask_value)
-
-        Else
-            Gl.glUniform1i(sw_use_mask, 0)
-        End If
-        If fill_alpha_cb.Checked Then
-            Gl.glUniform1i(sw_use_alpha_fill, 1)
-            Gl.glUniform1f(sw_alpha_value, alpha_percent)
-
-        Else
-            Gl.glUniform1i(sw_use_alpha_fill, 0)
-        End If
-        If multiply_cb.Checked Then
-            Gl.glUniform1i(sw_multiply, 1)
-        Else
-            Gl.glUniform1i(sw_multiply, 0)
-        End If
-
-        e = Gl.glGetError
-        Gl.glActiveTexture(Gl.GL_TEXTURE0)
-        Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
-        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 1)
-        Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image2)
-        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 2)
-        Gl.glBindTexture(Gl.GL_TEXTURE_2D, mask_texture)
-
 
         Gl.glColor4f(0.5, 0.5, 0.5, 0.0)
         Gl.glBegin(Gl.GL_QUADS)
@@ -808,12 +817,6 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         'render_to_temp_image()
         draw(True)
     End Sub
-    Private Sub blue_group_DoubleClick(sender As Object, e As EventArgs) Handles blue_group.DoubleClick
-        reset_radios(sender)
-        B_ = 0
-        'render_to_temp_image()
-        draw(True)
-    End Sub
     Private Sub alpha_group_DoubleClick(sender As Object, e As EventArgs) Handles alpha_group.DoubleClick
         reset_radios(sender)
         A_ = 0
@@ -850,7 +853,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         create_temp_image()
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles preserver_cb.CheckedChanged
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs)
         If Not _Started Then Return
         'render_to_temp_image()
         draw(True)
@@ -968,9 +971,22 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         MenuStrip.Enabled = False
         Dim temp_name = Path.GetFileNameWithoutExtension(source_filename)
         If frmSaveOptions.dx5_rb.Checked Then
+            Dim ss As String = ""
+            ' need to set format
             SaveFileDialog1.Title = "Save DDS"
-            Il.ilSetInteger(Il.IL_DXTC_FORMAT, Il.IL_DXT5)
-            SaveFileDialog1.Filter = "DDS (DXT5) (*.dds)|*.dds"
+            If frmSaveOptions.BC1.Checked Then
+                ss = "BC1"
+                Il.ilSetInteger(Il.IL_DXTC_FORMAT, Il.IL_DXT1)
+            End If
+            If frmSaveOptions.BC2.Checked Then
+                ss = "BC3"
+                Il.ilSetInteger(Il.IL_DXTC_FORMAT, Il.IL_DXT3)
+            End If
+            If frmSaveOptions.BC3.Checked Then
+                ss = "BC5"
+                Il.ilSetInteger(Il.IL_DXTC_FORMAT, Il.IL_DXT5)
+            End If
+            SaveFileDialog1.Filter = "DDS (" + ss + ") (*.dds)|*.dds"
             temp_name += ".dds"
         End If
         If frmSaveOptions.jpg_rb.Checked Then
@@ -1532,6 +1548,18 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Else
             use_alpha_blend = 0
         End If
+        draw(True)
+    End Sub
+
+    Private Sub GenMask_cb_CheckedChanged(sender As Object, e As EventArgs) Handles GenMask_cb.CheckedChanged
+        draw(True)
+    End Sub
+
+    Private Sub reset_btn_Click(sender As Object, e As EventArgs) Handles reset_btn.Click
+        r_r.Checked = True
+        g_g.Checked = True
+        b_b.Checked = True
+        a_a.Checked = True
         draw(True)
     End Sub
 End Class

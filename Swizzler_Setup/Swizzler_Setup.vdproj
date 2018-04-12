@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3775B3774E2A495EAAC1256859BB5E87"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4540C535A3DD482FB64F186483FC9CB3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -76,6 +82,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9FA6AD16B2524D27BC40C21C2C623C57"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9FD2A666A709476B90E529A9F1572776"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -148,25 +160,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F95FB012C8F9BB67B2896771B880C4D8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
+        "OwnerKey" = "8:_7A93159CDB96817D6716351C718B1BB6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -178,7 +172,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A93159CDB96817D6716351C718B1BB6"
+        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F95FB012C8F9BB67B2896771B880C4D8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -221,7 +233,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Swizzler_Setup_004.msi"
+        "OutputFilename" = "8:..\\Swizzler_Setup_005.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -341,6 +353,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3775B3774E2A495EAAC1256859BB5E87"
+            {
+            "SourcePath" = "8:..\\! WoT Texture Swizzler\\shaders\\maskGen_vertex.glsl"
+            "TargetName" = "8:maskGen_vertex.glsl"
+            "Tag" = "8:"
+            "Folder" = "8:_2BCFD5A8EB1349B48B651D421E09CD63"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4540C535A3DD482FB64F186483FC9CB3"
             {
             "SourcePath" = "8:..\\! WoT Texture Swizzler\\HTML files\\Help.png"
@@ -408,11 +440,6 @@
             "AssemblyAsmDisplayName" = "8:SlimDX, Version=2.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_7A93159CDB96817D6716351C718B1BB6"
-                    {
-                    "Name" = "8:SlimDX.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SlimDX.dll"
             "TargetName" = "8:"
@@ -512,6 +539,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9FD2A666A709476B90E529A9F1572776"
+            {
+            "SourcePath" = "8:..\\! WoT Texture Swizzler\\shaders\\maskGen_fragment.glsl"
+            "TargetName" = "8:maskGen_fragment.glsl"
+            "Tag" = "8:"
+            "Folder" = "8:_2BCFD5A8EB1349B48B651D421E09CD63"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A1968975CAE8497181CA6A03EF1DBE46"
             {
             "SourcePath" = "8:..\\! WoT Texture Swizzler\\shaders\\swizzler_vertex.glsl"
@@ -539,11 +586,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.OpenGl, Version=2.1.0.12, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A6354193EFF508F898EBA691E620B7AF"
-                    {
-                    "Name" = "8:Tao.OpenGl.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.OpenGl.dll"
             "TargetName" = "8:"
@@ -570,11 +612,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.DevIl, Version=1.6.8.3, Culture=neutral, PublicKeyToken=7ec4053013524957, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A991C897B61FA7B3E500178D86CF03AB"
-                    {
-                    "Name" = "8:Tao.DevIl.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.DevIl.dll"
             "TargetName" = "8:"
@@ -601,11 +638,6 @@
             "AssemblyAsmDisplayName" = "8:FastColoredTextBox, Version=2.16.11.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CC7B016703EA290B24673BA9E63BE59A"
-                    {
-                    "Name" = "8:FastColoredTextBox.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FastColoredTextBox.dll"
             "TargetName" = "8:"
@@ -632,11 +664,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.FreeGlut, Version=2.4.0.2, Culture=neutral, PublicKeyToken=6e602a6ad6c0d06d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CE2057D825CFCB96D4697E055949347A"
-                    {
-                    "Name" = "8:Tao.FreeGlut.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.FreeGlut.dll"
             "TargetName" = "8:"
@@ -703,11 +730,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.Platform.Windows, Version=1.0.0.5, Culture=neutral, PublicKeyToken=701104b2da67a104, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F95FB012C8F9BB67B2896771B880C4D8"
-                    {
-                    "Name" = "8:Tao.Platform.Windows.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.Platform.Windows.dll"
             "TargetName" = "8:"
@@ -816,15 +838,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Swizzler"
-        "ProductCode" = "8:{93FC7B37-70EE-4C51-B588-1DFFD4E66B4E}"
-        "PackageCode" = "8:{D7A0E86D-6BA3-4794-987D-C6C98C5846C4}"
+        "ProductCode" = "8:{B14059A5-DC5C-45A9-894F-BD785596778C}"
+        "PackageCode" = "8:{7F2F1C97-F32A-4240-A8B4-FA77228AAECC}"
         "UpgradeCode" = "8:{2F5CB7E8-E9B8-4311-B488-091FA5184B6E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.4"
+        "ProductVersion" = "8:1.0.5"
         "Manufacturer" = "8:Coffee_"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

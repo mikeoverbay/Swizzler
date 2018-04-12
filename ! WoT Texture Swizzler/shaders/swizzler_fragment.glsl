@@ -7,7 +7,6 @@ uniform int r_mask;
 uniform int g_mask;
 uniform int b_mask;
 uniform int a_mask;
-uniform int preserve;
 uniform int convert_RGB_NM;
 uniform int use_alpha_fill;
 uniform int use_alpha_blend;
@@ -26,10 +25,6 @@ varying vec2 texCoord;
 void main() {
     vec4 color_out = texture2D(colorMap_out, texCoord);
     vec4 color_in = texture2D(colorMap_in, texCoord);
-    if (preserve != 1){
-        color_out.rgb *= 0.0;
-        color_out.a = 1.0;
-    }
 
     float r_r, r_g, r_b, r_a ;
     float g_r, g_g, g_b, g_a ;

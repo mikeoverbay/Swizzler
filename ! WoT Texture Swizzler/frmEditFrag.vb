@@ -38,6 +38,7 @@ Public Class frmEditFrag
 		frag_tb.AcceptsTab = True
 		CB1.Items.Add("color")
         CB1.Items.Add("swizzler")
+        CB1.Items.Add("maskGen")
 
 		'CB1.Items.Add("shadow_test")
 		recompile_bt.Enabled = False
@@ -81,7 +82,11 @@ Public Class frmEditFrag
                 Gl.glDeleteShader(color_pgm)
                 color_pgm = build_shader(vs3, fs3, color_pgm, "color_pgm")
             Case 1
+                Gl.glDeleteShader(swizzler_pgm)
                 swizzler_pgm = build_shader(vs3, fs3, swizzler_pgm, "swizzler_pgm")
+            Case 2
+                Gl.glDeleteShader(maskgen_pgm)
+                maskgen_pgm = build_shader(vs3, fs3, swizzler_pgm, "maskgen_pgm")
         End Select
 		Gl.glFinish()
 

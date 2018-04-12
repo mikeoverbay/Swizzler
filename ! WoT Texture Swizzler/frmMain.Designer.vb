@@ -24,19 +24,6 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.top_panel = New System.Windows.Forms.Panel()
-        Me.mask_alpha_blend_cb = New System.Windows.Forms.CheckBox()
-        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
-        Me.m_alpha_cb = New System.Windows.Forms.CheckBox()
-        Me.m_blue_cb = New System.Windows.Forms.CheckBox()
-        Me.m_green_cb = New System.Windows.Forms.CheckBox()
-        Me.m_red_cb = New System.Windows.Forms.CheckBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.sub_rb = New System.Windows.Forms.RadioButton()
-        Me.mask_invert_rb = New System.Windows.Forms.RadioButton()
-        Me.mask_rb = New System.Windows.Forms.RadioButton()
-        Me.add_rb = New System.Windows.Forms.RadioButton()
-        Me.mask_cb = New System.Windows.Forms.CheckBox()
         Me.mask_tb = New System.Windows.Forms.TextBox()
         Me.multiply_cb = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -52,11 +39,8 @@ Partial Class frmMain
         Me.show_mask_rb = New System.Windows.Forms.RadioButton()
         Me.output_rb = New System.Windows.Forms.RadioButton()
         Me.source_rb = New System.Windows.Forms.RadioButton()
-        Me.preserver_cb = New System.Windows.Forms.CheckBox()
-        Me.scale_up_btn = New System.Windows.Forms.Button()
         Me.zoom = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.scale_down_btn = New System.Windows.Forms.Button()
         Me.alpha_group = New System.Windows.Forms.GroupBox()
         Me.a_r = New System.Windows.Forms.RadioButton()
         Me.a_a = New System.Windows.Forms.RadioButton()
@@ -77,6 +61,19 @@ Partial Class frmMain
         Me.r_b = New System.Windows.Forms.RadioButton()
         Me.r_g = New System.Windows.Forms.RadioButton()
         Me.r_r = New System.Windows.Forms.RadioButton()
+        Me.mask_alpha_blend_cb = New System.Windows.Forms.CheckBox()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.m_alpha_cb = New System.Windows.Forms.CheckBox()
+        Me.m_blue_cb = New System.Windows.Forms.CheckBox()
+        Me.m_green_cb = New System.Windows.Forms.CheckBox()
+        Me.m_red_cb = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.sub_rb = New System.Windows.Forms.RadioButton()
+        Me.mask_invert_rb = New System.Windows.Forms.RadioButton()
+        Me.mask_rb = New System.Windows.Forms.RadioButton()
+        Me.add_rb = New System.Windows.Forms.RadioButton()
+        Me.mask_cb = New System.Windows.Forms.CheckBox()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.m_open = New System.Windows.Forms.ToolStripMenuItem()
@@ -93,14 +90,18 @@ Partial Class frmMain
         Me.pb1 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.GenMask_cb = New System.Windows.Forms.CheckBox()
+        Me.scale_up_btn = New System.Windows.Forms.Button()
+        Me.scale_down_btn = New System.Windows.Forms.Button()
+        Me.reset_btn = New System.Windows.Forms.Button()
         Me.top_panel.SuspendLayout()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.alpha_group.SuspendLayout()
         Me.blue_group.SuspendLayout()
         Me.green_group.SuspendLayout()
         Me.red_group.SuspendLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
         Me.MenuStrip.SuspendLayout()
         Me.pb3.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -110,6 +111,8 @@ Partial Class frmMain
         '
         Me.top_panel.BackColor = System.Drawing.Color.Silver
         Me.top_panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.top_panel.Controls.Add(Me.reset_btn)
+        Me.top_panel.Controls.Add(Me.GenMask_cb)
         Me.top_panel.Controls.Add(Me.mask_tb)
         Me.top_panel.Controls.Add(Me.multiply_cb)
         Me.top_panel.Controls.Add(Me.ComboBox1)
@@ -122,7 +125,6 @@ Partial Class frmMain
         Me.top_panel.Controls.Add(Me.convert_rgb_NM_cb)
         Me.top_panel.Controls.Add(Me.alpha_blend_cb)
         Me.top_panel.Controls.Add(Me.GroupBox1)
-        Me.top_panel.Controls.Add(Me.preserver_cb)
         Me.top_panel.Controls.Add(Me.scale_up_btn)
         Me.top_panel.Controls.Add(Me.zoom)
         Me.top_panel.Controls.Add(Me.Label2)
@@ -136,162 +138,6 @@ Partial Class frmMain
         Me.top_panel.Name = "top_panel"
         Me.top_panel.Size = New System.Drawing.Size(761, 105)
         Me.top_panel.TabIndex = 1
-        '
-        'mask_alpha_blend_cb
-        '
-        Me.mask_alpha_blend_cb.AutoSize = True
-        Me.mask_alpha_blend_cb.Checked = True
-        Me.mask_alpha_blend_cb.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.mask_alpha_blend_cb.Location = New System.Drawing.Point(12, 229)
-        Me.mask_alpha_blend_cb.Name = "mask_alpha_blend_cb"
-        Me.mask_alpha_blend_cb.Size = New System.Drawing.Size(83, 17)
-        Me.mask_alpha_blend_cb.TabIndex = 35
-        Me.mask_alpha_blend_cb.Tag = "8"
-        Me.mask_alpha_blend_cb.Text = "Blend Alpha"
-        Me.mask_alpha_blend_cb.UseVisualStyleBackColor = True
-        '
-        'TrackBar1
-        '
-        Me.TrackBar1.AutoSize = False
-        Me.TrackBar1.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.WoT_Texture_Swizzler.My.MySettings.Default, "mask_mix_amount", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.TrackBar1.LargeChange = 1
-        Me.TrackBar1.Location = New System.Drawing.Point(3, 193)
-        Me.TrackBar1.Maximum = 100
-        Me.TrackBar1.Name = "TrackBar1"
-        Me.TrackBar1.Size = New System.Drawing.Size(118, 43)
-        Me.TrackBar1.TabIndex = 34
-        Me.TrackBar1.TickFrequency = 10
-        Me.TrackBar1.TickStyle = System.Windows.Forms.TickStyle.Both
-        Me.TrackBar1.Value = Global.WoT_Texture_Swizzler.My.MySettings.Default.mask_mix_amount
-        '
-        'm_alpha_cb
-        '
-        Me.m_alpha_cb.AutoSize = True
-        Me.m_alpha_cb.Checked = True
-        Me.m_alpha_cb.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.m_alpha_cb.Location = New System.Drawing.Point(12, 170)
-        Me.m_alpha_cb.Name = "m_alpha_cb"
-        Me.m_alpha_cb.Size = New System.Drawing.Size(53, 17)
-        Me.m_alpha_cb.TabIndex = 33
-        Me.m_alpha_cb.Tag = "8"
-        Me.m_alpha_cb.Text = "Alpha"
-        Me.m_alpha_cb.UseVisualStyleBackColor = True
-        '
-        'm_blue_cb
-        '
-        Me.m_blue_cb.AutoSize = True
-        Me.m_blue_cb.Checked = True
-        Me.m_blue_cb.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.m_blue_cb.ForeColor = System.Drawing.Color.Blue
-        Me.m_blue_cb.Location = New System.Drawing.Point(12, 154)
-        Me.m_blue_cb.Name = "m_blue_cb"
-        Me.m_blue_cb.Size = New System.Drawing.Size(47, 17)
-        Me.m_blue_cb.TabIndex = 32
-        Me.m_blue_cb.Tag = "4"
-        Me.m_blue_cb.Text = "Blue"
-        Me.m_blue_cb.UseVisualStyleBackColor = True
-        '
-        'm_green_cb
-        '
-        Me.m_green_cb.AutoSize = True
-        Me.m_green_cb.Checked = True
-        Me.m_green_cb.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.m_green_cb.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.m_green_cb.Location = New System.Drawing.Point(12, 138)
-        Me.m_green_cb.Name = "m_green_cb"
-        Me.m_green_cb.Size = New System.Drawing.Size(55, 17)
-        Me.m_green_cb.TabIndex = 31
-        Me.m_green_cb.Tag = "2"
-        Me.m_green_cb.Text = "Green"
-        Me.m_green_cb.UseVisualStyleBackColor = True
-        '
-        'm_red_cb
-        '
-        Me.m_red_cb.AutoSize = True
-        Me.m_red_cb.Checked = True
-        Me.m_red_cb.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.m_red_cb.ForeColor = System.Drawing.Color.Red
-        Me.m_red_cb.Location = New System.Drawing.Point(12, 121)
-        Me.m_red_cb.Name = "m_red_cb"
-        Me.m_red_cb.Size = New System.Drawing.Size(46, 17)
-        Me.m_red_cb.TabIndex = 30
-        Me.m_red_cb.Tag = "1"
-        Me.m_red_cb.Text = "Red"
-        Me.m_red_cb.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(9, 103)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(94, 13)
-        Me.Label3.TabIndex = 29
-        Me.Label3.Text = "Affected Channels"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.sub_rb)
-        Me.GroupBox2.Controls.Add(Me.mask_invert_rb)
-        Me.GroupBox2.Controls.Add(Me.mask_rb)
-        Me.GroupBox2.Controls.Add(Me.add_rb)
-        Me.GroupBox2.Controls.Add(Me.mask_cb)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 11)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(96, 84)
-        Me.GroupBox2.TabIndex = 28
-        Me.GroupBox2.TabStop = False
-        '
-        'sub_rb
-        '
-        Me.sub_rb.AutoSize = True
-        Me.sub_rb.Location = New System.Drawing.Point(7, 31)
-        Me.sub_rb.Name = "sub_rb"
-        Me.sub_rb.Size = New System.Drawing.Size(65, 17)
-        Me.sub_rb.TabIndex = 3
-        Me.sub_rb.Text = "Subtract"
-        Me.sub_rb.UseVisualStyleBackColor = True
-        '
-        'mask_invert_rb
-        '
-        Me.mask_invert_rb.AutoSize = True
-        Me.mask_invert_rb.Location = New System.Drawing.Point(7, 62)
-        Me.mask_invert_rb.Name = "mask_invert_rb"
-        Me.mask_invert_rb.Size = New System.Drawing.Size(81, 17)
-        Me.mask_invert_rb.TabIndex = 2
-        Me.mask_invert_rb.Text = "Mask Invert"
-        Me.mask_invert_rb.UseVisualStyleBackColor = True
-        '
-        'mask_rb
-        '
-        Me.mask_rb.AutoSize = True
-        Me.mask_rb.Location = New System.Drawing.Point(7, 47)
-        Me.mask_rb.Name = "mask_rb"
-        Me.mask_rb.Size = New System.Drawing.Size(51, 17)
-        Me.mask_rb.TabIndex = 1
-        Me.mask_rb.Text = "Mask"
-        Me.mask_rb.UseVisualStyleBackColor = True
-        '
-        'add_rb
-        '
-        Me.add_rb.AutoSize = True
-        Me.add_rb.Checked = True
-        Me.add_rb.Location = New System.Drawing.Point(7, 16)
-        Me.add_rb.Name = "add_rb"
-        Me.add_rb.Size = New System.Drawing.Size(65, 17)
-        Me.add_rb.TabIndex = 0
-        Me.add_rb.TabStop = True
-        Me.add_rb.Text = "Replace"
-        Me.add_rb.UseVisualStyleBackColor = True
-        '
-        'mask_cb
-        '
-        Me.mask_cb.AutoSize = True
-        Me.mask_cb.Location = New System.Drawing.Point(7, -1)
-        Me.mask_cb.Name = "mask_cb"
-        Me.mask_cb.Size = New System.Drawing.Size(74, 17)
-        Me.mask_cb.TabIndex = 27
-        Me.mask_cb.Text = "Use Mask"
-        Me.mask_cb.UseVisualStyleBackColor = True
         '
         'mask_tb
         '
@@ -448,32 +294,6 @@ Partial Class frmMain
         Me.source_rb.Text = "Source"
         Me.source_rb.UseVisualStyleBackColor = True
         '
-        'preserver_cb
-        '
-        Me.preserver_cb.AutoSize = True
-        Me.preserver_cb.BackColor = System.Drawing.Color.Silver
-        Me.preserver_cb.FlatAppearance.BorderColor = System.Drawing.Color.White
-        Me.preserver_cb.FlatAppearance.CheckedBackColor = System.Drawing.Color.Maroon
-        Me.preserver_cb.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.preserver_cb.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray
-        Me.preserver_cb.ForeColor = System.Drawing.Color.Black
-        Me.preserver_cb.Location = New System.Drawing.Point(10, 79)
-        Me.preserver_cb.Name = "preserver_cb"
-        Me.preserver_cb.Size = New System.Drawing.Size(174, 17)
-        Me.preserver_cb.TabIndex = 14
-        Me.preserver_cb.Text = "Preserve Unassigned Channels"
-        Me.preserver_cb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.preserver_cb.UseVisualStyleBackColor = False
-        '
-        'scale_up_btn
-        '
-        Me.scale_up_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.ASC_large
-        Me.scale_up_btn.Location = New System.Drawing.Point(267, 77)
-        Me.scale_up_btn.Name = "scale_up_btn"
-        Me.scale_up_btn.Size = New System.Drawing.Size(33, 20)
-        Me.scale_up_btn.TabIndex = 10
-        Me.scale_up_btn.UseVisualStyleBackColor = True
-        '
         'zoom
         '
         Me.zoom.AutoSize = True
@@ -493,15 +313,6 @@ Partial Class frmMain
         Me.Label2.Size = New System.Drawing.Size(27, 13)
         Me.Label2.TabIndex = 12
         Me.Label2.Text = "Size"
-        '
-        'scale_down_btn
-        '
-        Me.scale_down_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.DESC_large
-        Me.scale_down_btn.Location = New System.Drawing.Point(306, 77)
-        Me.scale_down_btn.Name = "scale_down_btn"
-        Me.scale_down_btn.Size = New System.Drawing.Size(33, 20)
-        Me.scale_down_btn.TabIndex = 11
-        Me.scale_down_btn.UseVisualStyleBackColor = True
         '
         'alpha_group
         '
@@ -767,6 +578,162 @@ Partial Class frmMain
         Me.r_r.Text = "R"
         Me.r_r.UseVisualStyleBackColor = True
         '
+        'mask_alpha_blend_cb
+        '
+        Me.mask_alpha_blend_cb.AutoSize = True
+        Me.mask_alpha_blend_cb.Checked = True
+        Me.mask_alpha_blend_cb.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mask_alpha_blend_cb.Location = New System.Drawing.Point(12, 229)
+        Me.mask_alpha_blend_cb.Name = "mask_alpha_blend_cb"
+        Me.mask_alpha_blend_cb.Size = New System.Drawing.Size(83, 17)
+        Me.mask_alpha_blend_cb.TabIndex = 35
+        Me.mask_alpha_blend_cb.Tag = "8"
+        Me.mask_alpha_blend_cb.Text = "Blend Alpha"
+        Me.mask_alpha_blend_cb.UseVisualStyleBackColor = True
+        '
+        'TrackBar1
+        '
+        Me.TrackBar1.AutoSize = False
+        Me.TrackBar1.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.WoT_Texture_Swizzler.My.MySettings.Default, "mask_mix_amount", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.TrackBar1.LargeChange = 1
+        Me.TrackBar1.Location = New System.Drawing.Point(3, 193)
+        Me.TrackBar1.Maximum = 100
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.TrackBar1.Size = New System.Drawing.Size(118, 43)
+        Me.TrackBar1.TabIndex = 34
+        Me.TrackBar1.TickFrequency = 10
+        Me.TrackBar1.TickStyle = System.Windows.Forms.TickStyle.Both
+        Me.TrackBar1.Value = Global.WoT_Texture_Swizzler.My.MySettings.Default.mask_mix_amount
+        '
+        'm_alpha_cb
+        '
+        Me.m_alpha_cb.AutoSize = True
+        Me.m_alpha_cb.Checked = True
+        Me.m_alpha_cb.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.m_alpha_cb.Location = New System.Drawing.Point(12, 170)
+        Me.m_alpha_cb.Name = "m_alpha_cb"
+        Me.m_alpha_cb.Size = New System.Drawing.Size(53, 17)
+        Me.m_alpha_cb.TabIndex = 33
+        Me.m_alpha_cb.Tag = "8"
+        Me.m_alpha_cb.Text = "Alpha"
+        Me.m_alpha_cb.UseVisualStyleBackColor = True
+        '
+        'm_blue_cb
+        '
+        Me.m_blue_cb.AutoSize = True
+        Me.m_blue_cb.Checked = True
+        Me.m_blue_cb.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.m_blue_cb.ForeColor = System.Drawing.Color.Blue
+        Me.m_blue_cb.Location = New System.Drawing.Point(12, 154)
+        Me.m_blue_cb.Name = "m_blue_cb"
+        Me.m_blue_cb.Size = New System.Drawing.Size(47, 17)
+        Me.m_blue_cb.TabIndex = 32
+        Me.m_blue_cb.Tag = "4"
+        Me.m_blue_cb.Text = "Blue"
+        Me.m_blue_cb.UseVisualStyleBackColor = True
+        '
+        'm_green_cb
+        '
+        Me.m_green_cb.AutoSize = True
+        Me.m_green_cb.Checked = True
+        Me.m_green_cb.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.m_green_cb.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.m_green_cb.Location = New System.Drawing.Point(12, 138)
+        Me.m_green_cb.Name = "m_green_cb"
+        Me.m_green_cb.Size = New System.Drawing.Size(55, 17)
+        Me.m_green_cb.TabIndex = 31
+        Me.m_green_cb.Tag = "2"
+        Me.m_green_cb.Text = "Green"
+        Me.m_green_cb.UseVisualStyleBackColor = True
+        '
+        'm_red_cb
+        '
+        Me.m_red_cb.AutoSize = True
+        Me.m_red_cb.Checked = True
+        Me.m_red_cb.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.m_red_cb.ForeColor = System.Drawing.Color.Red
+        Me.m_red_cb.Location = New System.Drawing.Point(12, 121)
+        Me.m_red_cb.Name = "m_red_cb"
+        Me.m_red_cb.Size = New System.Drawing.Size(46, 17)
+        Me.m_red_cb.TabIndex = 30
+        Me.m_red_cb.Tag = "1"
+        Me.m_red_cb.Text = "Red"
+        Me.m_red_cb.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(9, 103)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(94, 13)
+        Me.Label3.TabIndex = 29
+        Me.Label3.Text = "Affected Channels"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.sub_rb)
+        Me.GroupBox2.Controls.Add(Me.mask_invert_rb)
+        Me.GroupBox2.Controls.Add(Me.mask_rb)
+        Me.GroupBox2.Controls.Add(Me.add_rb)
+        Me.GroupBox2.Controls.Add(Me.mask_cb)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 11)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(96, 84)
+        Me.GroupBox2.TabIndex = 28
+        Me.GroupBox2.TabStop = False
+        '
+        'sub_rb
+        '
+        Me.sub_rb.AutoSize = True
+        Me.sub_rb.Location = New System.Drawing.Point(7, 31)
+        Me.sub_rb.Name = "sub_rb"
+        Me.sub_rb.Size = New System.Drawing.Size(65, 17)
+        Me.sub_rb.TabIndex = 3
+        Me.sub_rb.Text = "Subtract"
+        Me.sub_rb.UseVisualStyleBackColor = True
+        '
+        'mask_invert_rb
+        '
+        Me.mask_invert_rb.AutoSize = True
+        Me.mask_invert_rb.Location = New System.Drawing.Point(7, 62)
+        Me.mask_invert_rb.Name = "mask_invert_rb"
+        Me.mask_invert_rb.Size = New System.Drawing.Size(81, 17)
+        Me.mask_invert_rb.TabIndex = 2
+        Me.mask_invert_rb.Text = "Mask Invert"
+        Me.mask_invert_rb.UseVisualStyleBackColor = True
+        '
+        'mask_rb
+        '
+        Me.mask_rb.AutoSize = True
+        Me.mask_rb.Location = New System.Drawing.Point(7, 47)
+        Me.mask_rb.Name = "mask_rb"
+        Me.mask_rb.Size = New System.Drawing.Size(51, 17)
+        Me.mask_rb.TabIndex = 1
+        Me.mask_rb.Text = "Mask"
+        Me.mask_rb.UseVisualStyleBackColor = True
+        '
+        'add_rb
+        '
+        Me.add_rb.AutoSize = True
+        Me.add_rb.Checked = True
+        Me.add_rb.Location = New System.Drawing.Point(7, 16)
+        Me.add_rb.Name = "add_rb"
+        Me.add_rb.Size = New System.Drawing.Size(65, 17)
+        Me.add_rb.TabIndex = 0
+        Me.add_rb.TabStop = True
+        Me.add_rb.Text = "Replace"
+        Me.add_rb.UseVisualStyleBackColor = True
+        '
+        'mask_cb
+        '
+        Me.mask_cb.AutoSize = True
+        Me.mask_cb.Location = New System.Drawing.Point(7, -1)
+        Me.mask_cb.Name = "mask_cb"
+        Me.mask_cb.Size = New System.Drawing.Size(74, 17)
+        Me.mask_cb.TabIndex = 27
+        Me.mask_cb.Text = "Use Mask"
+        Me.mask_cb.UseVisualStyleBackColor = True
+        '
         'MenuStrip
         '
         Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.m_help, Me.m_top_most})
@@ -847,7 +814,7 @@ Partial Class frmMain
         Me.pb3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pb3.Location = New System.Drawing.Point(123, 129)
         Me.pb3.Name = "pb3"
-        Me.pb3.Size = New System.Drawing.Size(638, 268)
+        Me.pb3.Size = New System.Drawing.Size(638, 323)
         Me.pb3.TabIndex = 3
         '
         'pb1
@@ -874,7 +841,7 @@ Partial Class frmMain
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 129)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(123, 268)
+        Me.Panel1.Size = New System.Drawing.Size(123, 323)
         Me.Panel1.TabIndex = 4
         '
         'Label4
@@ -886,12 +853,50 @@ Partial Class frmMain
         Me.Label4.TabIndex = 36
         Me.Label4.Text = "Mix Amount"
         '
+        'GenMask_cb
+        '
+        Me.GenMask_cb.AutoSize = True
+        Me.GenMask_cb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GenMask_cb.Location = New System.Drawing.Point(650, 23)
+        Me.GenMask_cb.Name = "GenMask_cb"
+        Me.GenMask_cb.Size = New System.Drawing.Size(83, 17)
+        Me.GenMask_cb.TabIndex = 27
+        Me.GenMask_cb.Text = "Gen Mask"
+        Me.GenMask_cb.UseVisualStyleBackColor = True
+        '
+        'scale_up_btn
+        '
+        Me.scale_up_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.ASC_large
+        Me.scale_up_btn.Location = New System.Drawing.Point(267, 77)
+        Me.scale_up_btn.Name = "scale_up_btn"
+        Me.scale_up_btn.Size = New System.Drawing.Size(33, 20)
+        Me.scale_up_btn.TabIndex = 10
+        Me.scale_up_btn.UseVisualStyleBackColor = True
+        '
+        'scale_down_btn
+        '
+        Me.scale_down_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.DESC_large
+        Me.scale_down_btn.Location = New System.Drawing.Point(306, 77)
+        Me.scale_down_btn.Name = "scale_down_btn"
+        Me.scale_down_btn.Size = New System.Drawing.Size(33, 20)
+        Me.scale_down_btn.TabIndex = 11
+        Me.scale_down_btn.UseVisualStyleBackColor = True
+        '
+        'reset_btn
+        '
+        Me.reset_btn.Location = New System.Drawing.Point(9, 77)
+        Me.reset_btn.Name = "reset_btn"
+        Me.reset_btn.Size = New System.Drawing.Size(75, 23)
+        Me.reset_btn.TabIndex = 28
+        Me.reset_btn.Text = "Reset Routing"
+        Me.reset_btn.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(761, 397)
+        Me.ClientSize = New System.Drawing.Size(761, 452)
         Me.Controls.Add(Me.pb3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.top_panel)
@@ -905,9 +910,6 @@ Partial Class frmMain
         Me.TopMost = True
         Me.top_panel.ResumeLayout(False)
         Me.top_panel.PerformLayout()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.alpha_group.ResumeLayout(False)
@@ -918,6 +920,9 @@ Partial Class frmMain
         Me.green_group.PerformLayout()
         Me.red_group.ResumeLayout(False)
         Me.red_group.PerformLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.MenuStrip.ResumeLayout(False)
         Me.MenuStrip.PerformLayout()
         Me.pb3.ResumeLayout(False)
@@ -958,7 +963,6 @@ Partial Class frmMain
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents scale_down_btn As System.Windows.Forms.Button
     Friend WithEvents m_top_most As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents preserver_cb As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents output_rb As System.Windows.Forms.RadioButton
     Friend WithEvents source_rb As System.Windows.Forms.RadioButton
@@ -1001,4 +1005,6 @@ Partial Class frmMain
     Friend WithEvents mask_alpha_blend_cb As System.Windows.Forms.CheckBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents GenMask_cb As System.Windows.Forms.CheckBox
+    Friend WithEvents reset_btn As System.Windows.Forms.Button
 End Class

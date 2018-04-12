@@ -12,7 +12,9 @@
     Private Sub dx5_rb_CheckedChanged(sender As Object, e As EventArgs) Handles dx5_rb.CheckedChanged
         If dx5_rb.Checked Then
             mipmaps_cb.Enabled = True
+            format_group_box.Enabled = True
         Else
+            format_group_box.Enabled = False
             mipmaps_cb.Checked = False
             mipmaps_cb.Enabled = False
         End If
@@ -22,5 +24,9 @@
     Private Sub frmSaveOptions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         e.Cancel = True
         Me.Visible = False
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        texture_help.ShowDialog()
     End Sub
 End Class
