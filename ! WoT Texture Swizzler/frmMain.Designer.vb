@@ -24,6 +24,8 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.top_panel = New System.Windows.Forms.Panel()
+        Me.reset_btn = New System.Windows.Forms.Button()
+        Me.GenMask_cb = New System.Windows.Forms.CheckBox()
         Me.mask_tb = New System.Windows.Forms.TextBox()
         Me.multiply_cb = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -39,8 +41,10 @@ Partial Class frmMain
         Me.show_mask_rb = New System.Windows.Forms.RadioButton()
         Me.output_rb = New System.Windows.Forms.RadioButton()
         Me.source_rb = New System.Windows.Forms.RadioButton()
+        Me.scale_up_btn = New System.Windows.Forms.Button()
         Me.zoom = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.scale_down_btn = New System.Windows.Forms.Button()
         Me.alpha_group = New System.Windows.Forms.GroupBox()
         Me.a_r = New System.Windows.Forms.RadioButton()
         Me.a_a = New System.Windows.Forms.RadioButton()
@@ -90,10 +94,6 @@ Partial Class frmMain
         Me.pb1 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.GenMask_cb = New System.Windows.Forms.CheckBox()
-        Me.scale_up_btn = New System.Windows.Forms.Button()
-        Me.scale_down_btn = New System.Windows.Forms.Button()
-        Me.reset_btn = New System.Windows.Forms.Button()
         Me.top_panel.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.alpha_group.SuspendLayout()
@@ -138,6 +138,26 @@ Partial Class frmMain
         Me.top_panel.Name = "top_panel"
         Me.top_panel.Size = New System.Drawing.Size(761, 105)
         Me.top_panel.TabIndex = 1
+        '
+        'reset_btn
+        '
+        Me.reset_btn.Location = New System.Drawing.Point(9, 77)
+        Me.reset_btn.Name = "reset_btn"
+        Me.reset_btn.Size = New System.Drawing.Size(75, 23)
+        Me.reset_btn.TabIndex = 28
+        Me.reset_btn.Text = "Reset Routing"
+        Me.reset_btn.UseVisualStyleBackColor = True
+        '
+        'GenMask_cb
+        '
+        Me.GenMask_cb.AutoSize = True
+        Me.GenMask_cb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GenMask_cb.Location = New System.Drawing.Point(650, 23)
+        Me.GenMask_cb.Name = "GenMask_cb"
+        Me.GenMask_cb.Size = New System.Drawing.Size(83, 17)
+        Me.GenMask_cb.TabIndex = 27
+        Me.GenMask_cb.Text = "Gen Mask"
+        Me.GenMask_cb.UseVisualStyleBackColor = True
         '
         'mask_tb
         '
@@ -294,6 +314,15 @@ Partial Class frmMain
         Me.source_rb.Text = "Source"
         Me.source_rb.UseVisualStyleBackColor = True
         '
+        'scale_up_btn
+        '
+        Me.scale_up_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.ASC_large
+        Me.scale_up_btn.Location = New System.Drawing.Point(267, 77)
+        Me.scale_up_btn.Name = "scale_up_btn"
+        Me.scale_up_btn.Size = New System.Drawing.Size(33, 20)
+        Me.scale_up_btn.TabIndex = 10
+        Me.scale_up_btn.UseVisualStyleBackColor = True
+        '
         'zoom
         '
         Me.zoom.AutoSize = True
@@ -313,6 +342,15 @@ Partial Class frmMain
         Me.Label2.Size = New System.Drawing.Size(27, 13)
         Me.Label2.TabIndex = 12
         Me.Label2.Text = "Size"
+        '
+        'scale_down_btn
+        '
+        Me.scale_down_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.DESC_large
+        Me.scale_down_btn.Location = New System.Drawing.Point(306, 77)
+        Me.scale_down_btn.Name = "scale_down_btn"
+        Me.scale_down_btn.Size = New System.Drawing.Size(33, 20)
+        Me.scale_down_btn.TabIndex = 11
+        Me.scale_down_btn.UseVisualStyleBackColor = True
         '
         'alpha_group
         '
@@ -852,44 +890,6 @@ Partial Class frmMain
         Me.Label4.Size = New System.Drawing.Size(62, 13)
         Me.Label4.TabIndex = 36
         Me.Label4.Text = "Mix Amount"
-        '
-        'GenMask_cb
-        '
-        Me.GenMask_cb.AutoSize = True
-        Me.GenMask_cb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GenMask_cb.Location = New System.Drawing.Point(650, 23)
-        Me.GenMask_cb.Name = "GenMask_cb"
-        Me.GenMask_cb.Size = New System.Drawing.Size(83, 17)
-        Me.GenMask_cb.TabIndex = 27
-        Me.GenMask_cb.Text = "Gen Mask"
-        Me.GenMask_cb.UseVisualStyleBackColor = True
-        '
-        'scale_up_btn
-        '
-        Me.scale_up_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.ASC_large
-        Me.scale_up_btn.Location = New System.Drawing.Point(267, 77)
-        Me.scale_up_btn.Name = "scale_up_btn"
-        Me.scale_up_btn.Size = New System.Drawing.Size(33, 20)
-        Me.scale_up_btn.TabIndex = 10
-        Me.scale_up_btn.UseVisualStyleBackColor = True
-        '
-        'scale_down_btn
-        '
-        Me.scale_down_btn.Image = Global.WoT_Texture_Swizzler.My.Resources.Resources.DESC_large
-        Me.scale_down_btn.Location = New System.Drawing.Point(306, 77)
-        Me.scale_down_btn.Name = "scale_down_btn"
-        Me.scale_down_btn.Size = New System.Drawing.Size(33, 20)
-        Me.scale_down_btn.TabIndex = 11
-        Me.scale_down_btn.UseVisualStyleBackColor = True
-        '
-        'reset_btn
-        '
-        Me.reset_btn.Location = New System.Drawing.Point(9, 77)
-        Me.reset_btn.Name = "reset_btn"
-        Me.reset_btn.Size = New System.Drawing.Size(75, 23)
-        Me.reset_btn.TabIndex = 28
-        Me.reset_btn.Text = "Reset Routing"
-        Me.reset_btn.UseVisualStyleBackColor = True
         '
         'frmMain
         '

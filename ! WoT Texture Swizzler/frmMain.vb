@@ -318,6 +318,11 @@ Public Class frmMain
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image)
 
         End If
+        'If GenMask_cb.Checked Then
+        '    Gl.glEnable(Gl.GL_BLEND)
+        '    Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA)
+        '    Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image)
+        'End If
         'Gl.glBindTexture(Gl.GL_TEXTURE_2D, ModShadowMapping.depthTexture2)
         Gl.glPushMatrix()
         Gl.glTranslatef(0.0, 0.0F, -0.1F)
@@ -349,14 +354,6 @@ Public Class frmMain
         p3 = L + S
         p4 = L
         p4.Y += S.Y
-        If GenMask_cb.Checked Then
-            Gl.glEnable(Gl.GL_BLEND)
-            Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA)
-            Gl.glUseProgram(0)
-            Gl.glUseProgram(maskgen_pgm)
-            Gl.glUniform1i(mg_color, 0)
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
-        End If
         'draw and flip bufffers so the user can see the image
         Gl.glBegin(Gl.GL_QUADS)
         '---
@@ -706,7 +703,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Gl.glDisable(Gl.GL_BLEND)
         Gl.glDisable(Gl.GL_LIGHTING)
         Gl.glEnable(Gl.GL_TEXTURE_2D)
-        If Not GenMask_cb.CheckAlign Then
+        If Not GenMask_cb.Checked Then
             ' use swizzler
             Gl.glUseProgram(swizzler_pgm)
 
@@ -757,8 +754,8 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Else
             ' use maskgen_pgm pgm
             Gl.glUseProgram(maskgen_pgm)
-            Gl.glActiveTexture(Gl.GL_TEXTURE0)
             Gl.glUniform1i(mg_color, 0)
+            Gl.glActiveTexture(Gl.GL_TEXTURE0)
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
         End If
 
@@ -816,6 +813,13 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         G_ = 0
         'render_to_temp_image()
         draw(True)
+    End Sub
+    Private Sub blue_group_DoubleClick(sender As Object, e As EventArgs) Handles blue_group.DoubleClick
+        reset_radios(sender)
+        B_ = 0
+        'render_to_temp_image()
+        draw(True)
+
     End Sub
     Private Sub alpha_group_DoubleClick(sender As Object, e As EventArgs) Handles alpha_group.DoubleClick
         reset_radios(sender)
@@ -1024,7 +1028,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             Dim status As Boolean
             'Il.ilSetInteger(Il.IL_DXTC_DATA_FORMAT, Il.IL_DXT_NO_COMP)
             er = Il.ilGetError
-            If frmSaveOptions.dx5_rb.Checked Then
+            If frmSaveOptions.BC2.Checked Or frmSaveOptions.BC3.Checked Then
                 If frmSaveOptions.mipmaps_cb.Checked Then
                     Ilu.iluBuildMipmaps()
                 End If
@@ -1552,6 +1556,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     End Sub
 
     Private Sub GenMask_cb_CheckedChanged(sender As Object, e As EventArgs) Handles GenMask_cb.CheckedChanged
+        alpha_blend_cb.Checked = True
         draw(True)
     End Sub
 
@@ -1562,4 +1567,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         a_a.Checked = True
         draw(True)
     End Sub
+
+  
+
 End Class
