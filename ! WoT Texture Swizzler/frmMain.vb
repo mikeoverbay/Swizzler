@@ -1028,7 +1028,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             Dim status As Boolean
             'Il.ilSetInteger(Il.IL_DXTC_DATA_FORMAT, Il.IL_DXT_NO_COMP)
             er = Il.ilGetError
-            If frmSaveOptions.BC2.Checked Or frmSaveOptions.BC3.Checked Then
+            If frmSaveOptions.BC1.Checked Or frmSaveOptions.BC2.Checked Or frmSaveOptions.BC3.Checked Then
                 If frmSaveOptions.mipmaps_cb.Checked Then
                     Ilu.iluBuildMipmaps()
                 End If
