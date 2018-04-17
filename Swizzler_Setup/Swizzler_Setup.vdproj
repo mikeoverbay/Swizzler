@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0658D2FD4E8F3BE343BDE8B04B281699"
+        "OwnerKey" = "8:_D14F41356AD54D3DA261A5FD69C9E49D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_136031058828432FA156BB06461247F0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -53,12 +59,6 @@
         {
         "MsmKey" = "8:_74BFD3F1668844FA9CF9162D9161CB9F"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A93159CDB96817D6716351C718B1BB6"
-        "OwnerKey" = "8:_D14F41356AD54D3DA261A5FD69C9E49D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -160,6 +160,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0658D2FD4E8F3BE343BDE8B04B281699"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -185,12 +191,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A991C897B61FA7B3E500178D86CF03AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A93159CDB96817D6716351C718B1BB6"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -233,7 +233,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Swizzler_Setup_005.msi"
+        "OutputFilename" = "8:..\\Swizzler_Setup_006.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -293,6 +293,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0658D2FD4E8F3BE343BDE8B04B281699"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SlimDX, Version=2.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_0658D2FD4E8F3BE343BDE8B04B281699"
+                    {
+                    "Name" = "8:SlimDX.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SlimDX.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2BCFD5A8EB1349B48B651D421E09CD63"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_136031058828432FA156BB06461247F0"
             {
             "SourcePath" = "8:..\\! WoT Texture Swizzler\\Swizzler_icon.ico"
@@ -431,37 +462,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A93159CDB96817D6716351C718B1BB6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SlimDX, Version=2.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_7A93159CDB96817D6716351C718B1BB6"
-                    {
-                    "Name" = "8:SlimDX.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SlimDX.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2BCFD5A8EB1349B48B651D421E09CD63"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B0CF1AE49F148719DEBE22249DBEA6A"
@@ -868,15 +868,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Swizzler"
-        "ProductCode" = "8:{B14059A5-DC5C-45A9-894F-BD785596778C}"
-        "PackageCode" = "8:{DB714CEE-5C79-4288-B070-EF14A4AD751B}"
+        "ProductCode" = "8:{38EBF90F-F239-4DAC-A875-B99189DBF180}"
+        "PackageCode" = "8:{0A2B4198-B99B-4E2A-824B-7C4B8839A2E8}"
         "UpgradeCode" = "8:{2F5CB7E8-E9B8-4311-B488-091FA5184B6E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.5"
+        "ProductVersion" = "8:1.0.6"
         "Manufacturer" = "8:Coffee_"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

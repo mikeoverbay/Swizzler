@@ -17,8 +17,6 @@ Imports System.Math
 Imports System.Object
 Imports System.Threading
 Imports System.Data
-Imports SlimDX
-Imports SlimDX.Direct3D9
 
 
 Public Class frmMain
@@ -43,9 +41,6 @@ Public Class frmMain
         Public w As Single
     End Structure
 
-    Protected device As Device = Nothing
-    Protected backBuffer As Surface
-    Protected presentParams As PresentParameters
     Protected dds_format As Integer
     Structure v4_
         Public r As Single
@@ -85,7 +80,7 @@ Public Class frmMain
         Ilu.iluInit()
         Ilut.ilutInit()
         Ilut.ilutRenderer(Ilut.ILUT_OPENGL)
-        make_device()
+        'make_device()
         Me.Visible = True
         Me.Show()
         pb1.Visible = False
@@ -105,14 +100,21 @@ Public Class frmMain
         B_ = 4
         A_ = 8
         _zoom_ = 1.0
-        Application.DoEvents()
-        Application.DoEvents()
-        Application.DoEvents()
-        Application.DoEvents()
-        Application.DoEvents()
-        Application.DoEvents()
+
+        'change backcolor of a few things
+        reset_btn.BackColor = Color.Silver
+        quater_cb.BackColor = Color.Silver
+        scale_up_btn.BackColor = Color.Silver
+        scale_down_btn.BackColor = Color.Silver
+        ComboBox1.BackColor = Color.Silver
+        mask_tb.BackColor = Color.Silver
+
+        'start alert timer
+        Timer1.Start()
         Me.Text = "RGBA Channel Swizzler  Version:" + Application.ProductVersion
         mask_tb.Text = "No Mask file"
+        Application.DoEvents()
+
 
         _Started = True
         ComboBox1.SelectedIndex = 10
@@ -127,7 +129,7 @@ Public Class frmMain
             Gl.glDeleteTextures(1, temp_image2)
         End If
         Me.WindowState = FormWindowState.Normal
-        device.Dispose()
+        'device.Dispose()
         Wgl.wglMakeCurrent(IntPtr.Zero, IntPtr.Zero)
         Wgl.wglDeleteContext(pb1_hRC)
         Wgl.wglDeleteContext(pb3_hRC)
@@ -472,7 +474,6 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     Public Sub draw_prep()
         If Not _STARTED Then Return
         'if we are printing, we cant change this context
-
         Gl.glClearColor(0.0F, 0.0F, 0.0, 0.0F)
         Gl.glClear(Gl.GL_COLOR_BUFFER_BIT Or Gl.GL_DEPTH_BUFFER_BIT)
 
@@ -681,12 +682,9 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         temp_image = -1 Or temp_image2 = -1 Then
             Return
         End If
-        If fboID2 = -1 Then
-            create_rgba_FBO(sImageWidth, sImageHeight)
-        Else
-            'Gl.glDeleteFramebuffersEXT(1, fboID2)
-            create_rgba_FBO(sImageWidth, sImageHeight)
-        End If
+      
+        create_rgba_FBO(sImageWidth, sImageHeight) 'delete, create and resize fbo
+
         Gl.glBindFramebufferEXT(Gl.GL_RENDERBUFFER_EXT, fboID2)
         If Not (Wgl.wglMakeCurrent(pb1_hDC, pb1_hRC)) Then
             MessageBox.Show("Unable to make rendering context current")
@@ -1123,17 +1121,19 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
 
         Dim e = Gl.glGetError
-        Dim s = pb3.Size
-        Dim old_s = pb3.Size
-        Dim ac = pb3.Anchor
+        Dim old_size = pb3.Size
+        '  Dim s = pb3.Size
         pb3.Anchor = AnchorStyles.None
-        s.Width = sImageWidth
-        s.Height = sImageHeight
-        pb1.Size = s
-        pb1.Width = s.Width
-        pb1.Height = s.Height
+        ' s.Width = sImageWidth
+        '  s.Height = sImageHeight
+        ' pb3.Size = s
+        pb3.Width = sImageWidth
+        pb3.Height = sImageHeight
         Application.DoEvents()
         ViewOrtho2(sImageWidth, -sImageHeight)
+
+        'Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, fboID2)
+
         draw_prep()
         Gl.glFinish()
         Dim Id As Integer = Il.ilGenImage
@@ -1141,6 +1141,9 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Il.ilTexImage(sImageWidth, sImageHeight, 0, 4, Il.IL_RGBA, Il.IL_UNSIGNED_BYTE, Nothing)
 
         Gl.glReadPixels(0, 0, sImageWidth, sImageHeight, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, Il.ilGetData())
+        If quater_cb.Checked Then
+            Ilu.iluScale(sImageWidth * 0.5, sImageHeight * 0.5, Il.ilGetInteger(Il.IL_IMAGE_DEPTH))
+        End If
         'below is for testing that the render is correct.
         'Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image)
         'Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST)
@@ -1154,7 +1157,9 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
         Gl.glFinish()
         'pb3.Anchor = ac
-        'pb3.Size = old_s
+        pb3.Size = old_size
+        sImageWidth = old_size.Width
+        sImageHeight = old_size.Height
         Application.DoEvents()
         Gl.glFramebufferTexture2DEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_TEXTURE_2D, 0, 0)
 
@@ -1162,78 +1167,6 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         _printing = False
         Return Id
     End Function
-    Public Function prepare_dds_image_for_save() As SlimDX.Direct3D9.Texture
-        If Not (Wgl.wglMakeCurrent(pb3_hDC, pb3_hRC)) Then
-            MessageBox.Show("Unable to make rendering context current")
-            Return Nothing
-        End If
-        _printing = True
-        Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, 0)
-        Gl.glDrawBuffer(Gl.GL_BACK)
-
-
-        Dim e = Gl.glGetError
-        Dim s = pb3.Size
-        Dim old_s = pb3.Size
-        Dim ac = pb3.Anchor
-        pb3.Anchor = AnchorStyles.None
-        s.Width = sImageWidth
-        s.Height = sImageHeight
-        pb3.Size = s
-        pb3.Width = s.Width
-        pb3.Height = s.Height
-        Application.DoEvents()
-        ViewOrtho2(sImageWidth, sImageHeight)
-        draw_prep()
-
-
-
-        'Dim Id As Integer = Il.ilGenImage
-        'Il.ilBindImage(Id)
-        'Il.ilTexImage(sImageWidth, sImageHeight, 0, 4, Il.IL_RGBA, Il.IL_UNSIGNED_BYTE, Nothing)
-        Dim data(sImageWidth * sImageHeight * 4) As Byte
-        Gl.glReadPixels(0, 0, sImageWidth, sImageHeight, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, data)
-        Dim ms As New MemoryStream(data)
-        ' Dim texDes As New SlimDX.Direct3D9 .
-        Dim texarg = New SlimDX.Direct3D9.TextureArgument
-
-        Dim texture_ = New SlimDX.Direct3D9.Texture(Me.device, sImageWidth, sImageHeight, 1, Usage.Dynamic, Direct3D9.Format.Dxt5, Pool.Managed)
-        Dim rect As New Rectangle(New Point(0, 0), New Size(s.Width, s.Height))
-        Dim l = texture_.LockRectangle(0, rect, LockFlags.Discard)
-        Dim data1 = texture_.LockRectangle(0, LockFlags.None)
-        'data1.Data.Write(data, 0, FrameLength)
-        texture_.UnlockRectangle(0)
-        'Dim tp = texture_.
-        'ms.Dispose()
-        'PB3.Anchor = ac
-        pb3.Size = old_s
-        Application.DoEvents()
-        Gl.glFramebufferTexture2DEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_TEXTURE_2D, 0, 0)
-
-        ' Il.ilBindImage(0)
-        _printing = False
-        Return texture_
-    End Function
-    Private Sub make_device()
-        Dim d3d As Direct3D = New Direct3D()
-        Dim primaryAdaptor As AdapterInformation = d3d.Adapters().First()
-
-        presentParams = New PresentParameters()
-        With presentParams
-            .BackBufferWidth = Me.ClientSize.Width
-            .BackBufferHeight = Me.ClientSize.Height
-            .BackBufferFormat = Direct3D9.Format.A8R8G8B8
-            .Windowed = True
-        End With
-
-        Me.device = New Device(d3d, primaryAdaptor.Adapter, DeviceType.Hardware, Me.Handle, CreateFlags.HardwareVertexProcessing, presentParams)
-        'Me.device.BeginScene()
-        'backBuffer = device.GetBackBuffer(0, 0)
-        'Me.device.ColorFill(backBuffer, New Color4(Color.CornflowerBlue))
-        'Me.device.EndScene()
-        'Me.device.Present()
-        Return
-    End Sub
 
 #Region "Buttons"
 
@@ -1570,4 +1503,43 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
   
 
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If quater_cb.Checked Then
+            If quater_cb.BackColor = Color.Silver Then
+                quater_cb.BackColor = Color.Red
+            Else
+                quater_cb.BackColor = Color.Silver
+            End If
+        Else
+            quater_cb.BackColor = Color.Silver
+        End If
+        If GenMask_cb.Checked Then
+            If GenMask_cb.ForeColor = Color.Black Then
+                GenMask_cb.ForeColor = Color.Red
+            Else
+                GenMask_cb.ForeColor = Color.Black
+            End If
+        Else
+            GenMask_cb.ForeColor = Color.Black
+        End If
+        If mask_cb.Checked Then
+            If mask_cb.ForeColor = Color.Black Then
+                mask_cb.ForeColor = Color.Red
+            Else
+                mask_cb.ForeColor = Color.Black
+            End If
+        Else
+            mask_cb.ForeColor = Color.Black
+        End If
+
+    End Sub
+
+    Private Sub quater_cb_CheckedChanged(sender As Object, e As EventArgs) Handles quater_cb.CheckedChanged
+        If quater_cb.Checked Then
+            'Timer1.Start()
+        Else
+            'Timer1.Stop()
+            quater_cb.BackColor = Color.Silver
+        End If
+    End Sub
 End Class

@@ -22,8 +22,10 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.top_panel = New System.Windows.Forms.Panel()
+        Me.quater_cb = New System.Windows.Forms.CheckBox()
         Me.reset_btn = New System.Windows.Forms.Button()
         Me.GenMask_cb = New System.Windows.Forms.CheckBox()
         Me.mask_tb = New System.Windows.Forms.TextBox()
@@ -94,6 +96,7 @@ Partial Class frmMain
         Me.pb1 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.top_panel.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.alpha_group.SuspendLayout()
@@ -111,6 +114,7 @@ Partial Class frmMain
         '
         Me.top_panel.BackColor = System.Drawing.Color.Silver
         Me.top_panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.top_panel.Controls.Add(Me.quater_cb)
         Me.top_panel.Controls.Add(Me.reset_btn)
         Me.top_panel.Controls.Add(Me.GenMask_cb)
         Me.top_panel.Controls.Add(Me.mask_tb)
@@ -139,6 +143,17 @@ Partial Class frmMain
         Me.top_panel.Size = New System.Drawing.Size(761, 105)
         Me.top_panel.TabIndex = 1
         '
+        'quater_cb
+        '
+        Me.quater_cb.Appearance = System.Windows.Forms.Appearance.Button
+        Me.quater_cb.Location = New System.Drawing.Point(108, 76)
+        Me.quater_cb.Name = "quater_cb"
+        Me.quater_cb.Size = New System.Drawing.Size(93, 24)
+        Me.quater_cb.TabIndex = 29
+        Me.quater_cb.Text = "Save 1/4 Size"
+        Me.quater_cb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.quater_cb.UseVisualStyleBackColor = True
+        '
         'reset_btn
         '
         Me.reset_btn.Location = New System.Drawing.Point(9, 77)
@@ -161,9 +176,11 @@ Partial Class frmMain
         '
         'mask_tb
         '
+        Me.mask_tb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mask_tb.Font = New System.Drawing.Font("Lucida Console", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mask_tb.Location = New System.Drawing.Point(583, 74)
         Me.mask_tb.Name = "mask_tb"
-        Me.mask_tb.Size = New System.Drawing.Size(169, 20)
+        Me.mask_tb.Size = New System.Drawing.Size(169, 19)
         Me.mask_tb.TabIndex = 26
         '
         'multiply_cb
@@ -180,6 +197,7 @@ Partial Class frmMain
         '
         'ComboBox1
         '
+        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"00%", "05%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%", "55%", "60%", "65%", "70%", "75%", "80%", "85%", "90%", "95%", "100%"})
         Me.ComboBox1.Location = New System.Drawing.Point(583, 45)
@@ -765,9 +783,10 @@ Partial Class frmMain
         'mask_cb
         '
         Me.mask_cb.AutoSize = True
+        Me.mask_cb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mask_cb.Location = New System.Drawing.Point(7, -1)
         Me.mask_cb.Name = "mask_cb"
-        Me.mask_cb.Size = New System.Drawing.Size(74, 17)
+        Me.mask_cb.Size = New System.Drawing.Size(82, 17)
         Me.mask_cb.TabIndex = 27
         Me.mask_cb.Text = "Use Mask"
         Me.mask_cb.UseVisualStyleBackColor = True
@@ -891,6 +910,10 @@ Partial Class frmMain
         Me.Label4.TabIndex = 36
         Me.Label4.Text = "Mix Amount"
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 250
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1007,4 +1030,6 @@ Partial Class frmMain
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents GenMask_cb As System.Windows.Forms.CheckBox
     Friend WithEvents reset_btn As System.Windows.Forms.Button
+    Friend WithEvents quater_cb As System.Windows.Forms.CheckBox
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
 End Class
