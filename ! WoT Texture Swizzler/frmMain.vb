@@ -977,15 +977,11 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             ' need to set format
             SaveFileDialog1.Title = "Save DDS"
             If frmSaveOptions.BC1.Checked Then
-                ss = "BC1"
+                ss = "BC1 DX1"
                 Il.ilSetInteger(Il.IL_DXTC_FORMAT, Il.IL_DXT1)
             End If
             If frmSaveOptions.BC2.Checked Then
-                ss = "BC3"
-                Il.ilSetInteger(Il.IL_DXTC_FORMAT, Il.IL_DXT3)
-            End If
-            If frmSaveOptions.BC3.Checked Then
-                ss = "BC5"
+                ss = "BC3 DX5"
                 Il.ilSetInteger(Il.IL_DXTC_FORMAT, Il.IL_DXT5)
             End If
             SaveFileDialog1.Filter = "DDS (" + ss + ") (*.dds)|*.dds"
@@ -1026,7 +1022,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             Dim status As Boolean
             'Il.ilSetInteger(Il.IL_DXTC_DATA_FORMAT, Il.IL_DXT_NO_COMP)
             er = Il.ilGetError
-            If frmSaveOptions.BC1.Checked Or frmSaveOptions.BC2.Checked Or frmSaveOptions.BC3.Checked Then
+            If frmSaveOptions.BC1.Checked Or frmSaveOptions.BC2.Checked Then
                 If frmSaveOptions.mipmaps_cb.Checked Then
                     Ilu.iluBuildMipmaps()
                 End If

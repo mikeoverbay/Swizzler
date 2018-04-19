@@ -31,9 +31,8 @@ Partial Class frmSaveOptions
         Me.save_btn = New System.Windows.Forms.Button()
         Me.cancel_btn = New System.Windows.Forms.Button()
         Me.format_group_box = New System.Windows.Forms.GroupBox()
-        Me.BC1 = New System.Windows.Forms.RadioButton()
         Me.BC2 = New System.Windows.Forms.RadioButton()
-        Me.BC3 = New System.Windows.Forms.RadioButton()
+        Me.BC1 = New System.Windows.Forms.RadioButton()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.format_group_box.SuspendLayout()
@@ -127,7 +126,6 @@ Partial Class frmSaveOptions
         '
         'format_group_box
         '
-        Me.format_group_box.Controls.Add(Me.BC3)
         Me.format_group_box.Controls.Add(Me.BC2)
         Me.format_group_box.Controls.Add(Me.BC1)
         Me.format_group_box.Enabled = False
@@ -139,21 +137,11 @@ Partial Class frmSaveOptions
         Me.format_group_box.TabStop = False
         Me.format_group_box.Text = "DDS Format"
         '
-        'BC1
-        '
-        Me.BC1.AutoSize = True
-        Me.BC1.Location = New System.Drawing.Point(17, 19)
-        Me.BC1.Name = "BC1"
-        Me.BC1.Size = New System.Drawing.Size(71, 17)
-        Me.BC1.TabIndex = 0
-        Me.BC1.Text = "DDS BC1"
-        Me.BC1.UseVisualStyleBackColor = True
-        '
         'BC2
         '
         Me.BC2.AutoSize = True
         Me.BC2.Checked = True
-        Me.BC2.Location = New System.Drawing.Point(17, 39)
+        Me.BC2.Location = New System.Drawing.Point(17, 51)
         Me.BC2.Name = "BC2"
         Me.BC2.Size = New System.Drawing.Size(71, 17)
         Me.BC2.TabIndex = 1
@@ -161,15 +149,15 @@ Partial Class frmSaveOptions
         Me.BC2.Text = "DDS BC3"
         Me.BC2.UseVisualStyleBackColor = True
         '
-        'BC3
+        'BC1
         '
-        Me.BC3.AutoSize = True
-        Me.BC3.Location = New System.Drawing.Point(17, 60)
-        Me.BC3.Name = "BC3"
-        Me.BC3.Size = New System.Drawing.Size(71, 17)
-        Me.BC3.TabIndex = 2
-        Me.BC3.Text = "DDS BC5"
-        Me.BC3.UseVisualStyleBackColor = True
+        Me.BC1.AutoSize = True
+        Me.BC1.Location = New System.Drawing.Point(17, 28)
+        Me.BC1.Name = "BC1"
+        Me.BC1.Size = New System.Drawing.Size(71, 17)
+        Me.BC1.TabIndex = 0
+        Me.BC1.Text = "DDS BC1"
+        Me.BC1.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -218,7 +206,6 @@ Partial Class frmSaveOptions
     Friend WithEvents cancel_btn As System.Windows.Forms.Button
     Friend WithEvents png_rb As System.Windows.Forms.RadioButton
     Friend WithEvents format_group_box As System.Windows.Forms.GroupBox
-    Friend WithEvents BC3 As System.Windows.Forms.RadioButton
     Friend WithEvents BC2 As System.Windows.Forms.RadioButton
     Friend WithEvents BC1 As System.Windows.Forms.RadioButton
     Friend WithEvents Button1 As System.Windows.Forms.Button
