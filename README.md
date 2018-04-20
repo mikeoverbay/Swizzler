@@ -1,6 +1,9 @@
 # Swizzler
 A tool to help skin World of Tanks.. Tanks
 
+### Version 8
+Fixed a bug in saving 1/4 size and change the way its saved. Its much simpler now.
+
 ### Version 7
 Remove BC5 type from save options.. This is NEVER used and its a strange format.
 

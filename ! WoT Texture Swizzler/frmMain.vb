@@ -1005,9 +1005,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         End If
         SaveFileDialog1.FileName = temp_name
         If SaveFileDialog1.ShowDialog = Forms.DialogResult.OK Then
-            If File.Exists(SaveFileDialog1.FileName) Then
-                File.Delete(SaveFileDialog1.FileName)
-            End If
+            Il.ilEnable(Il.IL_FILE_OVERWRITE)
             Dim fn = SaveFileDialog1.FileName
             Dim texid = prepare_image_for_save()
             If texid = -1 Then
@@ -1112,23 +1110,6 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             Return -1
         End If
         _printing = True
-        Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, 0)
-        Gl.glDrawBuffer(Gl.GL_BACK)
-
-
-        Dim e = Gl.glGetError
-        Dim old_size = pb3.Size
-        '  Dim s = pb3.Size
-        pb3.Anchor = AnchorStyles.None
-        ' s.Width = sImageWidth
-        '  s.Height = sImageHeight
-        ' pb3.Size = s
-        pb3.Width = sImageWidth
-        pb3.Height = sImageHeight
-        Application.DoEvents()
-        ViewOrtho2(sImageWidth, -sImageHeight)
-
-        'Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, fboID2)
 
         draw_prep()
         Gl.glFinish()
@@ -1136,29 +1117,17 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Il.ilBindImage(Id)
         Il.ilTexImage(sImageWidth, sImageHeight, 0, 4, Il.IL_RGBA, Il.IL_UNSIGNED_BYTE, Nothing)
 
-        Gl.glReadPixels(0, 0, sImageWidth, sImageHeight, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, Il.ilGetData())
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image)
+
+        Gl.glGetTexImage(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, Il.ilGetData())
+
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
+
         If quater_cb.Checked Then
             Ilu.iluScale(sImageWidth * 0.5, sImageHeight * 0.5, Il.ilGetInteger(Il.IL_IMAGE_DEPTH))
         End If
-        'below is for testing that the render is correct.
-        'Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image)
-        'Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST)
-        'Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST)
-
-        'Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Il.ilGetInteger(Il.IL_IMAGE_BPP), Il.ilGetInteger(Il.IL_IMAGE_WIDTH), _
-        'Il.ilGetInteger(Il.IL_IMAGE_HEIGHT), 0, Il.ilGetInteger(Il.IL_IMAGE_FORMAT), Gl.GL_UNSIGNED_BYTE, _
-        'Il.ilGetData())
-
-        'Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
 
         Gl.glFinish()
-        'pb3.Anchor = ac
-        pb3.Size = old_size
-        sImageWidth = old_size.Width
-        sImageHeight = old_size.Height
-        Application.DoEvents()
-        Gl.glFramebufferTexture2DEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_TEXTURE_2D, 0, 0)
-
         Il.ilBindImage(0)
         _printing = False
         Return Id
@@ -1371,6 +1340,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     End Sub
 
     Private Sub pb3_Paint(sender As Object, e As PaintEventArgs) Handles pb3.Paint
+        If _printing Then Return
         draw(True)
 
     End Sub
