@@ -1126,7 +1126,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         If quater_cb.Checked Then
             Ilu.iluScale(sImageWidth * 0.5, sImageHeight * 0.5, Il.ilGetInteger(Il.IL_IMAGE_DEPTH))
         End If
-
+        Ilu.iluFlipImage()
         Gl.glFinish()
         Il.ilBindImage(0)
         _printing = False

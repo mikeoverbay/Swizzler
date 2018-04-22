@@ -160,25 +160,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F95FB012C8F9BB67B2896771B880C4D8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
+        "OwnerKey" = "8:_0658D2FD4E8F3BE343BDE8B04B281699"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,7 +172,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0658D2FD4E8F3BE343BDE8B04B281699"
+        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F95FB012C8F9BB67B2896771B880C4D8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -233,7 +233,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Swizzler_Setup_008.msi"
+        "OutputFilename" = "8:..\\Swizzler_Setup_009.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -300,11 +300,6 @@
             "AssemblyAsmDisplayName" = "8:SlimDX, Version=2.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_0658D2FD4E8F3BE343BDE8B04B281699"
-                    {
-                    "Name" = "8:SlimDX.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SlimDX.dll"
             "TargetName" = "8:"
@@ -591,11 +586,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.OpenGl, Version=2.1.0.12, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A6354193EFF508F898EBA691E620B7AF"
-                    {
-                    "Name" = "8:Tao.OpenGl.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.OpenGl.dll"
             "TargetName" = "8:"
@@ -622,11 +612,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.DevIl, Version=1.6.8.3, Culture=neutral, PublicKeyToken=7ec4053013524957, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A991C897B61FA7B3E500178D86CF03AB"
-                    {
-                    "Name" = "8:Tao.DevIl.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.DevIl.dll"
             "TargetName" = "8:"
@@ -653,11 +638,6 @@
             "AssemblyAsmDisplayName" = "8:FastColoredTextBox, Version=2.16.11.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CC7B016703EA290B24673BA9E63BE59A"
-                    {
-                    "Name" = "8:FastColoredTextBox.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FastColoredTextBox.dll"
             "TargetName" = "8:"
@@ -684,11 +664,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.FreeGlut, Version=2.4.0.2, Culture=neutral, PublicKeyToken=6e602a6ad6c0d06d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CE2057D825CFCB96D4697E055949347A"
-                    {
-                    "Name" = "8:Tao.FreeGlut.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.FreeGlut.dll"
             "TargetName" = "8:"
@@ -755,11 +730,6 @@
             "AssemblyAsmDisplayName" = "8:Tao.Platform.Windows, Version=1.0.0.5, Culture=neutral, PublicKeyToken=701104b2da67a104, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F95FB012C8F9BB67B2896771B880C4D8"
-                    {
-                    "Name" = "8:Tao.Platform.Windows.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Tao.Platform.Windows.dll"
             "TargetName" = "8:"
@@ -868,15 +838,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Swizzler"
-        "ProductCode" = "8:{A5E8D4A9-55A7-40F7-82E6-C736CD4E0929}"
-        "PackageCode" = "8:{E6F7DA63-997D-4171-86D5-AD2CD44A71CE}"
+        "ProductCode" = "8:{CC3CBE06-7B92-4738-BAF1-C9373341882B}"
+        "PackageCode" = "8:{4F4391B1-8126-4143-85A0-26DAEAB67235}"
         "UpgradeCode" = "8:{2F5CB7E8-E9B8-4311-B488-091FA5184B6E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.8"
+        "ProductVersion" = "8:1.0.9"
         "Manufacturer" = "8:Coffee_"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
