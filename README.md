@@ -1,6 +1,12 @@
 # Swizzler
 A tool to help skin World of Tanks.. Tanks
 
+### Version 10
+Added a tool to stack/combine textures.
+Note this uses the Red channel for input of the loaded textures.
+Most games dont have a single texture for rough and metal. They are stacked or packed or combined in to one texture.
+IE... Red = roughness, Green = metalic and so on.
+
 ### Version 9
 Swizzler was actually saving files upside down!
 This is FIXED in this version!!

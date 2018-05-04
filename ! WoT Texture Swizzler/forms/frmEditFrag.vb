@@ -39,6 +39,7 @@ Public Class frmEditFrag
 		CB1.Items.Add("color")
         CB1.Items.Add("swizzler")
         CB1.Items.Add("maskGen")
+        CB1.Items.Add("combiner")
 
 		'CB1.Items.Add("shadow_test")
 		recompile_bt.Enabled = False
@@ -87,6 +88,9 @@ Public Class frmEditFrag
             Case 2
                 Gl.glDeleteShader(maskgen_pgm)
                 maskgen_pgm = build_shader(vs3, fs3, swizzler_pgm, "maskgen_pgm")
+            Case 3
+                Gl.glDeleteShader(combiner_pgm)
+                combiner_pgm = build_shader(vs3, fs3, combiner_pgm, "combiner_pgm")
         End Select
 		Gl.glFinish()
 

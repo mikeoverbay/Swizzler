@@ -7,6 +7,7 @@ Module GL_ShaderLoader
     Public color_pgm As Integer
     Public swizzler_pgm As Integer
     Public maskgen_pgm As Integer
+    Public combiner_pgm As Integer
     Public mg_color As Integer
     Public alpha As UInteger = 0
     Public c_address1, n_address1, l_address1 As Integer
@@ -23,6 +24,7 @@ Module GL_ShaderLoader
     Public s_textureH As Integer
     Public shadowMap, color_in, color_out As Integer
     Public r_mask, b_mask, g_mask, a_mask, convert_rgb_NM, sw_alpha_value, sw_use_alpha_fill, sw_multiply As Integer
+    Public sw_flip_y, sw_flip_x As Integer
     Public sw_mask_location As Integer
     Public sw_mask_function As Integer
     Public sw_use_mask As Integer
@@ -30,6 +32,10 @@ Module GL_ShaderLoader
     Public sw_mask_mix As Integer
     Public view_normal_mode_ As Integer
     Public sw_blend_alpha As Integer
+
+    Public comb_texture1, comb_texture2, comb_texture3, comb_texture4 As Integer
+    Public comb_M_1, comb_M_2, comb_M_3, comb_M_4 As Integer
+    Public comb_r_level, comb_g_level, comb_b_level, comb_a_level As Integer
 
     Public Sub build_shaders()
         Dim buf = Gl.glGetString(Gl.GL_EXTENSIONS).Split(" ")
@@ -48,6 +54,10 @@ Module GL_ShaderLoader
         Dim fs1() As String = {New StreamReader(ap + "maskGen_fragment.glsl").ReadToEnd}
         maskgen_pgm = build_shader(vs1, fs1, maskgen_pgm, "maskgen_pgm")
 
+        Dim vs11() As String = {New StreamReader(ap + "combiner_vertex.glsl").ReadToEnd}
+        Dim fs11() As String = {New StreamReader(ap + "combiner_fragment.glsl").ReadToEnd}
+        combiner_pgm = build_shader(vs11, fs11, combiner_pgm, "combiner_pgm")
+
         Gl.glFinish() '<-- Make sure all shaders are done compiling. Not sure this is a real issue.
 
         '/////////////////////
@@ -55,8 +65,10 @@ Module GL_ShaderLoader
         '////////////////////
         c_address = Gl.glGetUniformLocation(color_pgm, "colorMap")
         mask = Gl.glGetUniformLocation(color_pgm, "mask")
+        '==========================================================================================
 
         mg_color = Gl.glGetUniformLocation(maskgen_pgm, "colorMap")
+        '==========================================================================================
 
         color_in = Gl.glGetUniformLocation(swizzler_pgm, "colorMap_in")
         color_out = Gl.glGetUniformLocation(swizzler_pgm, "colorMap_out")
@@ -65,6 +77,8 @@ Module GL_ShaderLoader
         b_mask = Gl.glGetUniformLocation(swizzler_pgm, "b_mask")
         a_mask = Gl.glGetUniformLocation(swizzler_pgm, "a_mask")
         convert_rgb_NM = Gl.glGetUniformLocation(swizzler_pgm, "convert_RGB_NM")
+        sw_flip_x = Gl.glGetUniformLocation(swizzler_pgm, "flip_x")
+        sw_flip_y = Gl.glGetUniformLocation(swizzler_pgm, "flip_y")
         sw_alpha_value = Gl.glGetUniformLocation(swizzler_pgm, "alpha_value")
         sw_use_alpha_fill = Gl.glGetUniformLocation(swizzler_pgm, "use_alpha_fill")
         sw_multiply = Gl.glGetUniformLocation(swizzler_pgm, "alpha_multiply")
@@ -74,12 +88,28 @@ Module GL_ShaderLoader
         sw_mask_channels = Gl.glGetUniformLocation(swizzler_pgm, "mask_texture_channels")
         sw_mask_mix = Gl.glGetUniformLocation(swizzler_pgm, "mask_mix")
         sw_blend_alpha = Gl.glGetUniformLocation(swizzler_pgm, "use_alpha_blend")
+        '==========================================================================================
+
+        comb_texture1 = Gl.glGetUniformLocation(combiner_pgm, "texture_1")
+        comb_texture2 = Gl.glGetUniformLocation(combiner_pgm, "texture_2")
+        comb_texture3 = Gl.glGetUniformLocation(combiner_pgm, "texture_3")
+        comb_texture4 = Gl.glGetUniformLocation(combiner_pgm, "texture_4")
+        comb_M_1 = Gl.glGetUniformLocation(combiner_pgm, "r_mask")
+        comb_M_2 = Gl.glGetUniformLocation(combiner_pgm, "g_mask")
+        comb_M_3 = Gl.glGetUniformLocation(combiner_pgm, "b_mask")
+        comb_M_4 = Gl.glGetUniformLocation(combiner_pgm, "a_mask")
+        comb_r_level = Gl.glGetUniformLocation(combiner_pgm, "r_level")
+        comb_g_level = Gl.glGetUniformLocation(combiner_pgm, "g_level")
+        comb_b_level = Gl.glGetUniformLocation(combiner_pgm, "b_level")
+        comb_a_level = Gl.glGetUniformLocation(combiner_pgm, "a_level")
+
+
     End Sub
     Public Function build_shader(vs() As String, fs() As String, shader As Integer, name As String) As Integer
         Dim vertexObject, fragmentObject, status_code As Integer
         Dim sb As New StringBuilder
-        Dim len As Integer
-        sb.Length = 1025
+        Dim len As Integer = 0
+        sb.Length = 2025
 
         '-----------------------------------------------------
         vertexObject = Gl.glCreateShader(Gl.GL_VERTEX_SHADER)
@@ -90,7 +120,7 @@ Module GL_ShaderLoader
         Gl.glGetShaderiv(vertexObject, Gl.GL_COMPILE_STATUS, status_code)
 
         If status_code = 0 Then
-            Gl.glGetInfoLogARB(fragmentObject, 1024, len, sb)
+            Gl.glGetShaderInfoLog(vertexObject, 1024, len, sb)
             MsgBox(name + " vertex didn't compile!" + vbCrLf + sb.ToString.Replace(vbLf, vbCrLf), MsgBoxStyle.Critical)
             Gl.glDeleteShader(vertexObject)
             Return -1
@@ -103,7 +133,7 @@ Module GL_ShaderLoader
         Gl.glCompileShader(fragmentObject)
         Gl.glGetShaderiv(fragmentObject, Gl.GL_COMPILE_STATUS, status_code)
         If status_code = 0 Then
-            Gl.glGetInfoLogARB(fragmentObject, 1024, len, sb)
+            Gl.glGetShaderInfoLog(fragmentObject, 1024, len, sb)
             MsgBox(name + " Fragment didn't compile!" + vbCrLf + sb.ToString.Replace(vbLf, vbCrLf), MsgBoxStyle.Critical)
             Gl.glDeleteShader(fragmentObject)
             Return -1
@@ -119,7 +149,7 @@ Module GL_ShaderLoader
         Gl.glGetShaderiv(fragmentObject, Gl.GL_LINK_STATUS, status_code)
 
         If status_code = 0 Then
-            Gl.glGetShaderInfoLog(shader, len, 8192, sb)
+            Gl.glGetShaderInfoLog(shader, 8192, len, sb)
             MsgBox(name + "  did not Link!", MsgBoxStyle.Exclamation)
 
         End If

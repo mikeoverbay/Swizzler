@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -135,27 +135,34 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmMain.vb">
+    <Compile Include="forms\frmCombiner.Designer.vb">
+      <DependentUpon>frmCombiner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forms\frmCombiner.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.vb">
+    <Compile Include="forms\frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditFrag.designer.vb">
+    <Compile Include="forms\frmEditFrag.designer.vb">
       <DependentUpon>frmEditFrag.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEditFrag.vb">
+    <Compile Include="forms\frmEditFrag.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSaveOptions.Designer.vb">
+    <Compile Include="forms\frmSaveOptions.Designer.vb">
       <DependentUpon>frmSaveOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmSaveOptions.vb">
+    <Compile Include="forms\frmSaveOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GL_ShaderLoader.vb" />
-    <Compile Include="modOpenGL.vb" />
+    <Compile Include="modules\GL_ShaderLoader.vb" />
+    <Compile Include="modules\modGlobals.vb" />
+    <Compile Include="modules\modOpenGL.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -171,21 +178,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="texture_help.Designer.vb">
+    <Compile Include="forms\texture_help.Designer.vb">
       <DependentUpon>texture_help.vb</DependentUpon>
     </Compile>
-    <Compile Include="texture_help.vb">
+    <Compile Include="forms\texture_help.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmEditFrag.resx">
+    <EmbeddedResource Include="forms\frmCombiner.resx">
+      <DependentUpon>frmCombiner.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmEditFrag.resx">
       <DependentUpon>frmEditFrag.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSaveOptions.resx">
+    <EmbeddedResource Include="forms\frmSaveOptions.resx">
       <DependentUpon>frmSaveOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -194,7 +204,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="texture_help.resx">
+    <EmbeddedResource Include="forms\texture_help.resx">
       <DependentUpon>texture_help.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -214,6 +224,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="shaders\color_vertex.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="shaders\combiner_fragment.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="shaders\combiner_vertex.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="shaders\maskGen_fragment.glsl">

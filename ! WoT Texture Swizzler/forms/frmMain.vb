@@ -1,4 +1,5 @@
-﻿Imports System.Windows
+﻿#Region "imports"
+Imports System.Windows
 Imports System.Windows.Forms
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -17,14 +18,12 @@ Imports System.Math
 Imports System.Object
 Imports System.Threading
 Imports System.Data
+#End Region
 
 
 Public Class frmMain
 #Region "variables"
-    Private Zoom_Factor As Single
     Private mouse_pos As New Point
-    Private rect_location As New Point
-    Private rect_size As New Point
     Private mouse_down As Boolean = False
     Private mouse_delta As New Point
 
@@ -48,24 +47,14 @@ Public Class frmMain
         Public b As Single
         Public a As Single
     End Structure
-    Public R_ As Integer = 1
-    Public G_ As Integer = 2
-    Public B_ As Integer = 4
-    Public A_ As Integer = 8
 
     Public source_filename As String = "No File"
     Public mask_filename As String = "No File"
     Public destination_filename As String = "No File"
-    Public temp_image As Integer = -1
-    Public temp_image2 As Integer = -1
-    Public sImageWidth As Integer
-    Public sImageHeight As Integer
     Private _zoom_ As Single = 1.0
-    Public old_h, old_w As Integer
 
     Public form_loaded As Boolean = False
 
-    Public _Started As Boolean = False
     Public _printing As Boolean = False
 
     Public current_texture_swizz As Integer = -1
@@ -145,7 +134,12 @@ Public Class frmMain
         draw(True)
 
     End Sub
-
+    Private Sub set_pb3_size()
+        pb3.Width = Me.ClientSize.Width - Panel1.Width
+        pb3.Height = Me.ClientSize.Height - (Me.MenuStrip.Height + Me.top_panel.Height)
+        pb3.Location = New Point(Panel1.Width, Me.MenuStrip.Height + Me.top_panel.Height)
+        sBox.location = New Point((pb3.Width - sBox.Width) / 2, (pb3.Height - sBox.Height) / 2)
+    End Sub
     Private Sub frmSwizzler_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         form_loaded = True
     End Sub
@@ -219,41 +213,64 @@ Public Class frmMain
 
     Private Sub r_assign(sender As Object, e As EventArgs)
         If Not _Started Then Return
-        R_ = R_ And CInt(sender.tag)
-        R_ = R_ Or CInt(sender.tag)
+        sender = DirectCast(sender, RadioButton)
+        M_R_ = M_R_ And CInt(sender.tag)
+        M_R_ = M_R_ Or CInt(sender.tag)
         'render_to_temp_image()
         draw(True)
     End Sub
     Private Sub g_assign(sender As Object, e As EventArgs)
         If Not _Started Then Return
-        G_ = G_ And CInt(sender.tag)
-        G_ = G_ Or CInt(sender.tag)
+        sender = DirectCast(sender, RadioButton)
+        M_G_ = M_G_ And CInt(sender.tag)
+        M_G_ = M_G_ Or CInt(sender.tag)
         'render_to_temp_image()
         draw(True)
     End Sub
     Private Sub b_assign(sender As Object, e As EventArgs)
         If Not _Started Then Return
-        B_ = B_ And CInt(sender.tag)
-        B_ = B_ Or CInt(sender.tag)
+        sender = DirectCast(sender, RadioButton)
+        M_B_ = M_B_ And CInt(sender.tag)
+        M_B_ = M_B_ Or CInt(sender.tag)
         'render_to_temp_image()
         draw(True)
     End Sub
     Private Sub a_assign(sender As Object, e As EventArgs)
         If Not _Started Then Return
-        A_ = A_ And CInt(sender.tag)
-        A_ = A_ Or CInt(sender.tag)
+        sender = DirectCast(sender, RadioButton)
+        M_A_ = M_A_ And CInt(sender.tag)
+        M_A_ = M_A_ Or CInt(sender.tag)
         'render_to_temp_image()
         draw(True)
     End Sub
 
+    Private Sub set_up_color_selections()
+        If frmCombiner.combiner_active_cb.Checked Then
+            R_ = C_R_
+            G_ = C_G_
+            B_ = C_B_
+            A_ = C_A_
+        Else
+            R_ = M_R_
+            G_ = M_G_
+            B_ = M_B_
+            A_ = M_A_
+        End If
+    End Sub
 
     '#################################################################################### draw
-
     Public Sub draw(ByVal resize As Boolean)
+        Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_REPLACE)
         If Not _Started Then Return
         If _printing Then Return
         'if we are printing, we cant change this context
-        render_to_temp_image()
+        set_up_color_selections()
+        If frmCombiner.combiner_active_cb.Checked Then
+            render_to_temp_combiner()
+        Else
+            render_to_temp_image()
+        End If
+        set_pb3_size()
         If resize Then
             If Not (Wgl.wglMakeCurrent(pb3_hDC, pb3_hRC)) Then
                 MessageBox.Show("Unable to make rendering context current")
@@ -523,7 +540,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     Private Sub m_open_Click(sender As Object, e As EventArgs) Handles m_open.Click
         MenuStrip.Enabled = False
         OpenFileDialog1.Title = "Load Image"
-        OpenFileDialog1.Filter = "DDS (DXT5) (*.dds)|*.dds|PNG (*.png)|*.png|BMP (*.bmp)|*.bmp|JPG (*.jpg)|*.jpg"
+        OpenFileDialog1.Filter = "DDS (DXT) (*.dds)|*.dds|PNG (*.png)|*.png|BMP (*.bmp)|*.bmp|JPG (*.jpg)|*.jpg"
 
         If OpenFileDialog1.ShowDialog = Forms.DialogResult.OK Then
             source_filename = OpenFileDialog1.FileName
@@ -631,7 +648,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         'check status
         Dim fbostatus = Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT)
         If fbostatus <> Gl.GL_FRAMEBUFFER_COMPLETE_EXT Then
-            MsgBox("I failed to create the shadow FBO 2!", MsgBoxStyle.Exclamation, "Opengl Issue...")
+            MsgBox("I failed to create the FBO!", MsgBoxStyle.Exclamation, "Opengl Issue...")
         End If
         ' switch back to window-system-provided framebuffer
         Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, 0)
@@ -676,6 +693,109 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
     Public drawbuffer0() = {Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_NONE}
     Public drawbuffer1() = {Gl.GL_NONE, Gl.GL_COLOR_ATTACHMENT1_EXT}
+    Private Sub render_to_temp_combiner()
+        'dont try and render nonexistent textures.
+        If cb_image_r <= 0 And cb_image_g <= 0 And cb_image_b <= 0 And cb_image_a <= 0 Then Return
+
+        create_rgba_FBO(sImageWidth, sImageHeight) 'delete, create and resize fbo
+
+        Gl.glBindFramebufferEXT(Gl.GL_RENDERBUFFER_EXT, fboID2)
+        If Not (Wgl.wglMakeCurrent(pb1_hDC, pb1_hRC)) Then
+            MessageBox.Show("Unable to make rendering context current")
+            Return
+        End If
+        _printing = True
+        attache_RGBA_FBO(temp_image)
+        Gl.glDrawBuffers(2, drawbuffer0(0))
+        ViewOrtho2(sImageWidth, -sImageHeight)
+        Dim e = Gl.glGetError
+
+        Gl.glClearColor(0.0, 0.0, 0.0, 1.0)
+        Gl.glClear(Gl.GL_COLOR_BUFFER_BIT Or Gl.GL_DEPTH_BUFFER_BIT)
+        Gl.glDisable(Gl.GL_BLEND)
+        Gl.glDisable(Gl.GL_LIGHTING)
+        Gl.glEnable(Gl.GL_TEXTURE_2D)
+        '=============================================================
+        Gl.glUseProgram(combiner_pgm)
+        Gl.glUniform1i(comb_texture1, 0)
+        Gl.glUniform1i(comb_texture2, 1)
+        Gl.glUniform1i(comb_texture3, 2)
+        Gl.glUniform1i(comb_texture4, 3)
+        Gl.glUniform1f(comb_r_level, CSng(frmCombiner.r_track.Value / 100))
+        Gl.glUniform1f(comb_g_level, CSng(frmCombiner.g_track.Value / 100))
+        Gl.glUniform1f(comb_b_level, CSng(frmCombiner.b_track.Value / 100))
+        Gl.glUniform1f(comb_a_level, CSng(frmCombiner.a_track.Value / 100))
+
+
+        Gl.glEnable(Gl.GL_TEXTURE_2D)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0)
+
+        If frmCombiner.r_enable.Checked And frmCombiner.r_filename.Text <> "" Then
+            Gl.glUniform1i(comb_M_1, C_R_)
+        Else
+            Gl.glUniform1i(comb_M_1, 0)
+        End If
+
+        If frmCombiner.g_enable.Checked And frmCombiner.g_filename.Text <> "" Then
+            Gl.glUniform1i(comb_M_2, C_G_)
+        Else
+            Gl.glUniform1i(comb_M_2, 0)
+        End If
+
+        If frmCombiner.b_enable.Checked And frmCombiner.b_filename.Text <> "" Then
+            Gl.glUniform1i(comb_M_3, C_B_)
+        Else
+            Gl.glUniform1i(comb_M_3, 0)
+        End If
+
+        If frmCombiner.a_enable.Checked And frmCombiner.a_filename.Text <> "" Then
+            Gl.glUniform1i(comb_M_4, C_A_)
+        Else
+            Gl.glUniform1i(comb_M_4, 0)
+        End If
+
+
+
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, cb_image_r)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 1)
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, cb_image_g)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 2)
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, cb_image_b)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 3)
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, cb_image_a)
+
+
+        Gl.glColor4f(0.5, 0.5, 0.5, 0.0)
+        Gl.glBegin(Gl.GL_QUADS)
+        Gl.glTexCoord2f(0.0, 0.0)
+        Gl.glVertex3f(0.0, sImageHeight, -0.1)
+
+        Gl.glTexCoord2f(0.0, 1.0)
+        Gl.glVertex3f(0.0, 0.0, -0.1)
+
+        Gl.glTexCoord2f(1.0, 1.0)
+        Gl.glVertex3f(sImageWidth, 0.0, -0.1)
+
+        Gl.glTexCoord2f(1.0, 0.0)
+        Gl.glVertex3f(sImageWidth, sImageHeight, -0.1)
+
+        Gl.glEnd()
+        Gl.glUseProgram(0)
+        attache_texture(0)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0)
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 2)
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 1)
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
+        Gl.glActiveTexture(Gl.GL_TEXTURE0 + 0)
+        Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
+
+        Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, 0)
+        Gl.glDrawBuffer(Gl.GL_BACK)
+        _printing = False
+
+    End Sub
 
     Private Sub render_to_temp_image()
         If current_texture_swizz = -1 Or _
@@ -715,6 +835,16 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             Gl.glUniform1i(sw_mask_function, mask_function)
             Gl.glUniform1f(sw_mask_mix, CSng(TrackBar1.Value / 100.0!))
             Gl.glUniform1i(sw_blend_alpha, use_alpha_blend)
+            If m_flip_x_cb.Checked Then
+                Gl.glUniform1i(sw_flip_x, 1)
+            Else
+                Gl.glUniform1i(sw_flip_x, 0)
+            End If
+            If m_flip_y_cb.Checked Then
+                Gl.glUniform1i(sw_flip_y, 1)
+            Else
+                Gl.glUniform1i(sw_flip_y, 0)
+            End If
             If convert_rgb_NM_cb.Checked Then
                 Gl.glUniform1i(convert_rgb_NM, 1)
             Else
@@ -1072,17 +1202,24 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         End If
         If get_size Then
 
-            sBox.Width = Il.ilGetInteger(Il.IL_IMAGE_WIDTH)
-            sBox.Height = Il.ilGetInteger(Il.IL_IMAGE_HEIGHT)
+            old_sbox.Width = Il.ilGetInteger(Il.IL_IMAGE_WIDTH)
+            old_sbox.Height = Il.ilGetInteger(Il.IL_IMAGE_HEIGHT)
             _zoom_ = 1
-            sImageHeight = sBox.Height
-            sImageWidth = sBox.Width
+            sImageWidth = old_sbox.Width
+            sImageHeight = old_sbox.Height
+            old_sImageHeight = sImageHeight
+            old_sImageWidth = sImageWidth
             rect_size.X = sImageWidth
             rect_size.Y = sImageHeight
+            old_rect_size = rect_size
             old_w = sImageWidth
             old_h = sImageHeight
             zoom.Text = "Zoom:" + vbCrLf + "100%"
             Zoom_Factor = 1.0
+        Else
+            'if open layer lands here, it wont affect anything.
+            open_size.X = Il.ilGetInteger(Il.IL_IMAGE_WIDTH)
+            open_size.Y = Il.ilGetInteger(Il.IL_IMAGE_HEIGHT)
         End If
         Il.ilConvertImage(Il.IL_RGBA, Il.IL_UNSIGNED_BYTE)
         Dim er = Gl.glGetError
@@ -1216,6 +1353,12 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
 
     Public Sub img_scale_up()
+        If current_texture_swizz = -1 Then
+            Return
+        End If
+        If frmCombiner.combiner_active_cb.Checked Then
+            Return
+        End If
         If Zoom_Factor >= 4.0 Then
             Zoom_Factor = 4.0
             Return 'to big and the t_bmp creation will hammer memory.
@@ -1254,6 +1397,12 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         draw(True)
     End Sub
     Public Sub img_scale_down()
+        If current_texture_swizz = -1 Then
+            Return
+        End If
+        If frmCombiner.combiner_active_cb.Checked Then
+            Return
+        End If
         If Zoom_Factor <= 0.25 Then
             Zoom_Factor = 0.25
             Return
@@ -1424,7 +1573,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         set_mask_value()
     End Sub
     Private mask_value = 15
-    Private Sub set_mask_value()
+    Public Sub set_mask_value()
         mask_value = 0
         mask_value = m_red_cb.Tag
         mask_value += m_green_cb.Tag
@@ -1464,7 +1613,18 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         g_g.Checked = True
         b_b.Checked = True
         a_a.Checked = True
-        draw(True)
+        R_ = R_ And 1
+        R_ = R_ Or 1
+
+        G_ = G_ And 2
+        G_ = G_ Or 2
+
+        B_ = B_ And 4
+        B_ = B_ Or 4
+
+        A_ = A_ And 8
+        A_ = A_ Or 8
+        set_mask_value()
     End Sub
 
   
@@ -1497,6 +1657,19 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Else
             mask_cb.ForeColor = Color.Black
         End If
+        If frmCombiner.combiner_active_cb.Checked Then
+            If m_combiner.ForeColor = Color.Black Then
+                m_combiner.ForeColor = Color.Red
+                frmCombiner.combiner_active_cb.ForeColor = Color.Red
+            Else
+                m_combiner.ForeColor = Color.Black
+                frmCombiner.combiner_active_cb.ForeColor = Color.Black
+            End If
+        Else
+            m_combiner.ForeColor = Color.Black
+            frmCombiner.combiner_active_cb.ForeColor = Color.Black
+        End If
+
 
     End Sub
 
@@ -1507,5 +1680,26 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             'Timer1.Stop()
             quater_cb.BackColor = Color.Silver
         End If
+    End Sub
+
+    Private Sub m_combiner_Click(sender As Object, e As EventArgs) Handles m_combiner.Click
+        If m_combiner.Checked Then
+            Application.DoEvents()
+            frmCombiner.Show()
+
+        Else
+            Application.DoEvents()
+            frmCombiner.Hide()
+        End If
+    End Sub
+
+    Private Sub m_flip_y_cb_CheckedChanged(sender As Object, e As EventArgs) Handles m_flip_y_cb.CheckedChanged
+        If Not _Started Then Return
+        draw(True)
+    End Sub
+
+    Private Sub m_flip_x_cb_CheckedChanged(sender As Object, e As EventArgs) Handles m_flip_x_cb.CheckedChanged
+        If Not _Started Then Return
+        draw(True)
     End Sub
 End Class

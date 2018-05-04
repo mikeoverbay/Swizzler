@@ -89,6 +89,7 @@ Partial Class frmMain
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.m_edit_shaders = New System.Windows.Forms.ToolStripMenuItem()
         Me.m_help = New System.Windows.Forms.ToolStripMenuItem()
+        Me.m_combiner = New System.Windows.Forms.ToolStripMenuItem()
         Me.m_top_most = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -97,6 +98,9 @@ Partial Class frmMain
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.m_flip_y_cb = New System.Windows.Forms.CheckBox()
+        Me.m_flip_x_cb = New System.Windows.Forms.CheckBox()
         Me.top_panel.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.alpha_group.SuspendLayout()
@@ -108,12 +112,14 @@ Partial Class frmMain
         Me.MenuStrip.SuspendLayout()
         Me.pb3.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'top_panel
         '
         Me.top_panel.BackColor = System.Drawing.Color.Silver
         Me.top_panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.top_panel.Controls.Add(Me.Panel2)
         Me.top_panel.Controls.Add(Me.quater_cb)
         Me.top_panel.Controls.Add(Me.reset_btn)
         Me.top_panel.Controls.Add(Me.GenMask_cb)
@@ -126,7 +132,6 @@ Partial Class frmMain
         Me.top_panel.Controls.Add(Me.b_blue)
         Me.top_panel.Controls.Add(Me.b_green)
         Me.top_panel.Controls.Add(Me.b_red)
-        Me.top_panel.Controls.Add(Me.convert_rgb_NM_cb)
         Me.top_panel.Controls.Add(Me.alpha_blend_cb)
         Me.top_panel.Controls.Add(Me.GroupBox1)
         Me.top_panel.Controls.Add(Me.scale_up_btn)
@@ -140,7 +145,7 @@ Partial Class frmMain
         Me.top_panel.Dock = System.Windows.Forms.DockStyle.Top
         Me.top_panel.Location = New System.Drawing.Point(0, 24)
         Me.top_panel.Name = "top_panel"
-        Me.top_panel.Size = New System.Drawing.Size(761, 105)
+        Me.top_panel.Size = New System.Drawing.Size(873, 105)
         Me.top_panel.TabIndex = 1
         '
         'quater_cb
@@ -202,7 +207,7 @@ Partial Class frmMain
         Me.ComboBox1.Items.AddRange(New Object() {"00%", "05%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%", "55%", "60%", "65%", "70%", "75%", "80%", "85%", "90%", "95%", "100%"})
         Me.ComboBox1.Location = New System.Drawing.Point(583, 45)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(169, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(61, 21)
         Me.ComboBox1.TabIndex = 24
         '
         'fill_alpha_cb
@@ -210,9 +215,9 @@ Partial Class frmMain
         Me.fill_alpha_cb.AutoSize = True
         Me.fill_alpha_cb.Location = New System.Drawing.Point(583, 5)
         Me.fill_alpha_cb.Name = "fill_alpha_cb"
-        Me.fill_alpha_cb.Size = New System.Drawing.Size(114, 17)
+        Me.fill_alpha_cb.Size = New System.Drawing.Size(126, 17)
         Me.fill_alpha_cb.TabIndex = 23
-        Me.fill_alpha_cb.Text = "Use Alpha Opacity"
+        Me.fill_alpha_cb.Text = "Modify Alpha Opacity"
         Me.fill_alpha_cb.UseVisualStyleBackColor = True
         '
         'Label1
@@ -273,7 +278,7 @@ Partial Class frmMain
         'convert_rgb_NM_cb
         '
         Me.convert_rgb_NM_cb.AutoSize = True
-        Me.convert_rgb_NM_cb.Location = New System.Drawing.Point(508, 79)
+        Me.convert_rgb_NM_cb.Location = New System.Drawing.Point(16, 15)
         Me.convert_rgb_NM_cb.Name = "convert_rgb_NM_cb"
         Me.convert_rgb_NM_cb.Size = New System.Drawing.Size(69, 17)
         Me.convert_rgb_NM_cb.TabIndex = 17
@@ -283,7 +288,7 @@ Partial Class frmMain
         'alpha_blend_cb
         '
         Me.alpha_blend_cb.AutoSize = True
-        Me.alpha_blend_cb.Location = New System.Drawing.Point(419, 79)
+        Me.alpha_blend_cb.Location = New System.Drawing.Point(419, 81)
         Me.alpha_blend_cb.Name = "alpha_blend_cb"
         Me.alpha_blend_cb.Size = New System.Drawing.Size(83, 17)
         Me.alpha_blend_cb.TabIndex = 16
@@ -793,10 +798,10 @@ Partial Class frmMain
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.m_help, Me.m_top_most})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.m_help, Me.m_combiner, Me.m_top_most})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
-        Me.MenuStrip.Size = New System.Drawing.Size(761, 24)
+        Me.MenuStrip.Size = New System.Drawing.Size(873, 24)
         Me.MenuStrip.TabIndex = 2
         Me.MenuStrip.Text = "MenuStrip1"
         '
@@ -811,6 +816,7 @@ Partial Class frmMain
         '
         Me.m_open.Name = "m_open"
         Me.m_open.Size = New System.Drawing.Size(167, 22)
+        Me.m_open.Tag = "0"
         Me.m_open.Text = "Open Image"
         '
         'm_mask
@@ -847,6 +853,13 @@ Partial Class frmMain
         Me.m_help.Size = New System.Drawing.Size(44, 20)
         Me.m_help.Text = "Help"
         '
+        'm_combiner
+        '
+        Me.m_combiner.CheckOnClick = True
+        Me.m_combiner.Name = "m_combiner"
+        Me.m_combiner.Size = New System.Drawing.Size(72, 20)
+        Me.m_combiner.Text = "Combiner"
+        '
         'm_top_most
         '
         Me.m_top_most.Checked = True
@@ -871,7 +884,7 @@ Partial Class frmMain
         Me.pb3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pb3.Location = New System.Drawing.Point(123, 129)
         Me.pb3.Name = "pb3"
-        Me.pb3.Size = New System.Drawing.Size(638, 323)
+        Me.pb3.Size = New System.Drawing.Size(750, 323)
         Me.pb3.TabIndex = 3
         '
         'pb1
@@ -914,12 +927,45 @@ Partial Class frmMain
         '
         Me.Timer1.Interval = 250
         '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.Gray
+        Me.Panel2.Controls.Add(Me.m_flip_x_cb)
+        Me.Panel2.Controls.Add(Me.m_flip_y_cb)
+        Me.Panel2.Controls.Add(Me.convert_rgb_NM_cb)
+        Me.Panel2.Location = New System.Drawing.Point(758, -2)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(111, 105)
+        Me.Panel2.TabIndex = 30
+        '
+        'm_flip_y_cb
+        '
+        Me.m_flip_y_cb.AutoSize = True
+        Me.m_flip_y_cb.Location = New System.Drawing.Point(16, 49)
+        Me.m_flip_y_cb.Name = "m_flip_y_cb"
+        Me.m_flip_y_cb.Size = New System.Drawing.Size(52, 17)
+        Me.m_flip_y_cb.TabIndex = 18
+        Me.m_flip_y_cb.Text = "Flip Y"
+        Me.m_flip_y_cb.UseVisualStyleBackColor = True
+        '
+        'm_flip_x_cb
+        '
+        Me.m_flip_x_cb.AutoSize = True
+        Me.m_flip_x_cb.Location = New System.Drawing.Point(16, 72)
+        Me.m_flip_x_cb.Name = "m_flip_x_cb"
+        Me.m_flip_x_cb.Size = New System.Drawing.Size(52, 17)
+        Me.m_flip_x_cb.TabIndex = 19
+        Me.m_flip_x_cb.Text = "Flip X"
+        Me.m_flip_x_cb.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(761, 452)
+        Me.ClientSize = New System.Drawing.Size(873, 452)
         Me.Controls.Add(Me.pb3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.top_panel)
@@ -951,6 +997,8 @@ Partial Class frmMain
         Me.pb3.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1032,4 +1080,8 @@ Partial Class frmMain
     Friend WithEvents reset_btn As System.Windows.Forms.Button
     Friend WithEvents quater_cb As System.Windows.Forms.CheckBox
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents m_combiner As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents m_flip_x_cb As System.Windows.Forms.CheckBox
+    Friend WithEvents m_flip_y_cb As System.Windows.Forms.CheckBox
 End Class
