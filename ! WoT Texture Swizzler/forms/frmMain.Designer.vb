@@ -25,6 +25,10 @@ Partial Class frmMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.top_panel = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.m_flip_x_cb = New System.Windows.Forms.CheckBox()
+        Me.m_flip_y_cb = New System.Windows.Forms.CheckBox()
+        Me.convert_rgb_NM_cb = New System.Windows.Forms.CheckBox()
         Me.quater_cb = New System.Windows.Forms.CheckBox()
         Me.reset_btn = New System.Windows.Forms.Button()
         Me.GenMask_cb = New System.Windows.Forms.CheckBox()
@@ -37,7 +41,6 @@ Partial Class frmMain
         Me.b_blue = New System.Windows.Forms.Button()
         Me.b_green = New System.Windows.Forms.Button()
         Me.b_red = New System.Windows.Forms.Button()
-        Me.convert_rgb_NM_cb = New System.Windows.Forms.CheckBox()
         Me.alpha_blend_cb = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.show_mask_rb = New System.Windows.Forms.RadioButton()
@@ -98,10 +101,8 @@ Partial Class frmMain
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.m_flip_y_cb = New System.Windows.Forms.CheckBox()
-        Me.m_flip_x_cb = New System.Windows.Forms.CheckBox()
         Me.top_panel.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.alpha_group.SuspendLayout()
         Me.blue_group.SuspendLayout()
@@ -112,7 +113,6 @@ Partial Class frmMain
         Me.MenuStrip.SuspendLayout()
         Me.pb3.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'top_panel
@@ -147,6 +147,49 @@ Partial Class frmMain
         Me.top_panel.Name = "top_panel"
         Me.top_panel.Size = New System.Drawing.Size(873, 105)
         Me.top_panel.TabIndex = 1
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackColor = System.Drawing.Color.Gray
+        Me.Panel2.Controls.Add(Me.m_flip_x_cb)
+        Me.Panel2.Controls.Add(Me.m_flip_y_cb)
+        Me.Panel2.Controls.Add(Me.convert_rgb_NM_cb)
+        Me.Panel2.Location = New System.Drawing.Point(758, -2)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(111, 105)
+        Me.Panel2.TabIndex = 30
+        '
+        'm_flip_x_cb
+        '
+        Me.m_flip_x_cb.AutoSize = True
+        Me.m_flip_x_cb.Location = New System.Drawing.Point(16, 72)
+        Me.m_flip_x_cb.Name = "m_flip_x_cb"
+        Me.m_flip_x_cb.Size = New System.Drawing.Size(52, 17)
+        Me.m_flip_x_cb.TabIndex = 19
+        Me.m_flip_x_cb.Text = "Flip X"
+        Me.m_flip_x_cb.UseVisualStyleBackColor = True
+        '
+        'm_flip_y_cb
+        '
+        Me.m_flip_y_cb.AutoSize = True
+        Me.m_flip_y_cb.Location = New System.Drawing.Point(16, 49)
+        Me.m_flip_y_cb.Name = "m_flip_y_cb"
+        Me.m_flip_y_cb.Size = New System.Drawing.Size(52, 17)
+        Me.m_flip_y_cb.TabIndex = 18
+        Me.m_flip_y_cb.Text = "Flip Y"
+        Me.m_flip_y_cb.UseVisualStyleBackColor = True
+        '
+        'convert_rgb_NM_cb
+        '
+        Me.convert_rgb_NM_cb.AutoSize = True
+        Me.convert_rgb_NM_cb.Location = New System.Drawing.Point(16, 15)
+        Me.convert_rgb_NM_cb.Name = "convert_rgb_NM_cb"
+        Me.convert_rgb_NM_cb.Size = New System.Drawing.Size(69, 17)
+        Me.convert_rgb_NM_cb.TabIndex = 17
+        Me.convert_rgb_NM_cb.Text = "RGB NM"
+        Me.convert_rgb_NM_cb.UseVisualStyleBackColor = True
         '
         'quater_cb
         '
@@ -274,16 +317,6 @@ Partial Class frmMain
         Me.b_red.TabIndex = 18
         Me.b_red.Text = "R"
         Me.b_red.UseVisualStyleBackColor = False
-        '
-        'convert_rgb_NM_cb
-        '
-        Me.convert_rgb_NM_cb.AutoSize = True
-        Me.convert_rgb_NM_cb.Location = New System.Drawing.Point(16, 15)
-        Me.convert_rgb_NM_cb.Name = "convert_rgb_NM_cb"
-        Me.convert_rgb_NM_cb.Size = New System.Drawing.Size(69, 17)
-        Me.convert_rgb_NM_cb.TabIndex = 17
-        Me.convert_rgb_NM_cb.Text = "RGB NM"
-        Me.convert_rgb_NM_cb.UseVisualStyleBackColor = True
         '
         'alpha_blend_cb
         '
@@ -867,7 +900,7 @@ Partial Class frmMain
         Me.m_top_most.CheckState = System.Windows.Forms.CheckState.Checked
         Me.m_top_most.ForeColor = System.Drawing.Color.Red
         Me.m_top_most.Name = "m_top_most"
-        Me.m_top_most.Size = New System.Drawing.Size(70, 20)
+        Me.m_top_most.Size = New System.Drawing.Size(69, 20)
         Me.m_top_most.Text = "Top Most"
         '
         'SaveFileDialog1
@@ -927,39 +960,6 @@ Partial Class frmMain
         '
         Me.Timer1.Interval = 250
         '
-        'Panel2
-        '
-        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel2.BackColor = System.Drawing.Color.Gray
-        Me.Panel2.Controls.Add(Me.m_flip_x_cb)
-        Me.Panel2.Controls.Add(Me.m_flip_y_cb)
-        Me.Panel2.Controls.Add(Me.convert_rgb_NM_cb)
-        Me.Panel2.Location = New System.Drawing.Point(758, -2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(111, 105)
-        Me.Panel2.TabIndex = 30
-        '
-        'm_flip_y_cb
-        '
-        Me.m_flip_y_cb.AutoSize = True
-        Me.m_flip_y_cb.Location = New System.Drawing.Point(16, 49)
-        Me.m_flip_y_cb.Name = "m_flip_y_cb"
-        Me.m_flip_y_cb.Size = New System.Drawing.Size(52, 17)
-        Me.m_flip_y_cb.TabIndex = 18
-        Me.m_flip_y_cb.Text = "Flip Y"
-        Me.m_flip_y_cb.UseVisualStyleBackColor = True
-        '
-        'm_flip_x_cb
-        '
-        Me.m_flip_x_cb.AutoSize = True
-        Me.m_flip_x_cb.Location = New System.Drawing.Point(16, 72)
-        Me.m_flip_x_cb.Name = "m_flip_x_cb"
-        Me.m_flip_x_cb.Size = New System.Drawing.Size(52, 17)
-        Me.m_flip_x_cb.TabIndex = 19
-        Me.m_flip_x_cb.Text = "Flip X"
-        Me.m_flip_x_cb.UseVisualStyleBackColor = True
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -979,6 +979,8 @@ Partial Class frmMain
         Me.TopMost = True
         Me.top_panel.ResumeLayout(False)
         Me.top_panel.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.alpha_group.ResumeLayout(False)
@@ -997,8 +999,6 @@ Partial Class frmMain
         Me.pb3.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

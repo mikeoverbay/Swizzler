@@ -91,6 +91,8 @@ Partial Class frmEditFrag
         '
         Me.vert_tb.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
         Me.vert_tb.AutoIndent = False
+        Me.vert_tb.AutoIndentChars = False
+        Me.vert_tb.AutoIndentExistingLines = False
         Me.vert_tb.AutoScrollMinSize = New System.Drawing.Size(27, 14)
         Me.vert_tb.BackBrush = Nothing
         Me.vert_tb.BackColor = System.Drawing.Color.Black
@@ -204,7 +206,9 @@ Partial Class frmEditFrag
         '
         Me.frag_tb.AutoCompleteBracketsList = New Char() {Global.Microsoft.VisualBasic.ChrW(40), Global.Microsoft.VisualBasic.ChrW(41), Global.Microsoft.VisualBasic.ChrW(123), Global.Microsoft.VisualBasic.ChrW(125), Global.Microsoft.VisualBasic.ChrW(91), Global.Microsoft.VisualBasic.ChrW(93), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(34), Global.Microsoft.VisualBasic.ChrW(39), Global.Microsoft.VisualBasic.ChrW(39)}
         Me.frag_tb.AutoIndent = False
-        Me.frag_tb.AutoScrollMinSize = New System.Drawing.Size(2, 14)
+        Me.frag_tb.AutoIndentChars = False
+        Me.frag_tb.AutoIndentExistingLines = False
+        Me.frag_tb.AutoScrollMinSize = New System.Drawing.Size(27, 14)
         Me.frag_tb.BackBrush = Nothing
         Me.frag_tb.BackColor = System.Drawing.Color.Black
         Me.frag_tb.CaretColor = System.Drawing.Color.White

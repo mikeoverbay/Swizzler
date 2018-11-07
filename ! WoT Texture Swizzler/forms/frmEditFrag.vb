@@ -40,9 +40,7 @@ Public Class frmEditFrag
         CB1.Items.Add("swizzler")
         CB1.Items.Add("maskGen")
         CB1.Items.Add("combiner")
-
-		'CB1.Items.Add("shadow_test")
-		recompile_bt.Enabled = False
+        recompile_bt.Enabled = False
 		Me.Text = "Shader Editor:"
 		ct = vert_tb
 	End Sub

@@ -1,6 +1,9 @@
 # Swizzler
 A tool to help skin World of Tanks.. Tanks
 
+### Version 11
+Fixed a bug with disabling and reseting the channels
+
 ### Version 10
 Added a tool to stack/combine textures.
 Note this uses the Red channel for input of the loaded textures.

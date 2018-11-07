@@ -931,6 +931,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
     Private Sub red_group_DoubleClick(sender As Object, e As EventArgs) Handles red_group.DoubleClick
         reset_radios(sender)
+        M_R_ = 0
         R_ = 0
         'render_to_temp_image()
         draw(True)
@@ -938,12 +939,14 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
     Private Sub green_group_DoubleClick(sender As Object, e As EventArgs) Handles green_group.DoubleClick
         reset_radios(sender)
+        M_G_ = 0
         G_ = 0
         'render_to_temp_image()
         draw(True)
     End Sub
     Private Sub blue_group_DoubleClick(sender As Object, e As EventArgs) Handles blue_group.DoubleClick
         reset_radios(sender)
+        M_B_ = 0
         B_ = 0
         'render_to_temp_image()
         draw(True)
@@ -951,6 +954,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     End Sub
     Private Sub alpha_group_DoubleClick(sender As Object, e As EventArgs) Handles alpha_group.DoubleClick
         reset_radios(sender)
+        M_A_ = 0
         A_ = 0
         'render_to_temp_image()
         draw(True)
@@ -1615,15 +1619,20 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         a_a.Checked = True
         R_ = R_ And 1
         R_ = R_ Or 1
+        M_R_ = R_
 
         G_ = G_ And 2
         G_ = G_ Or 2
+        M_G_ = G_
 
         B_ = B_ And 4
         B_ = B_ Or 4
+        M_B_ = B_
 
         A_ = A_ And 8
         A_ = A_ Or 8
+        M_A_ = A_
+
         set_mask_value()
     End Sub
 
@@ -1702,4 +1711,6 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         If Not _Started Then Return
         draw(True)
     End Sub
+
+
 End Class
