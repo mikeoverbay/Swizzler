@@ -41,4 +41,9 @@
 
     Public current_texture_id(9) As Integer
 
+    Public sphere_model As Integer
+    Public sphere_texture As Integer
+    Public Structure vector
+        Public X, Y, Z As Double
+    End Structure
 End Module

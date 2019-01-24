@@ -103,6 +103,7 @@ Partial Class frmEditFrag
         Me.vert_tb.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.vert_tb.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
         Me.vert_tb.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.vert_tb.Font = New System.Drawing.Font("Courier New", 9.75!)
         Me.vert_tb.ForeColor = System.Drawing.Color.White
         Me.vert_tb.IndentBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.vert_tb.IsReplaceMode = False
@@ -208,7 +209,7 @@ Partial Class frmEditFrag
         Me.frag_tb.AutoIndent = False
         Me.frag_tb.AutoIndentChars = False
         Me.frag_tb.AutoIndentExistingLines = False
-        Me.frag_tb.AutoScrollMinSize = New System.Drawing.Size(27, 14)
+        Me.frag_tb.AutoScrollMinSize = New System.Drawing.Size(2, 14)
         Me.frag_tb.BackBrush = Nothing
         Me.frag_tb.BackColor = System.Drawing.Color.Black
         Me.frag_tb.CaretColor = System.Drawing.Color.White
@@ -218,6 +219,7 @@ Partial Class frmEditFrag
         Me.frag_tb.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.frag_tb.DisabledColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
         Me.frag_tb.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.frag_tb.Font = New System.Drawing.Font("Courier New", 9.75!)
         Me.frag_tb.ForeColor = System.Drawing.Color.White
         Me.frag_tb.IndentBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.frag_tb.IsReplaceMode = False
@@ -364,6 +366,7 @@ Partial Class frmEditFrag
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmEditFrag"
         Me.Text = "Shader Program Editor"
+        Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.vert_tb, System.ComponentModel.ISupportInitialize).EndInit()

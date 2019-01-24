@@ -104,11 +104,14 @@ Public Class frmMain
         mask_tb.Text = "No Mask file"
         Application.DoEvents()
 
+        load_model() ' get the sphere model
 
         _Started = True
         ComboBox1.SelectedIndex = 10
     End Sub
-
+    Private Sub load_model()
+        'sphere_model = get_X_model(Application.StartupPath + "\models\cylinder.x")
+    End Sub
     Private Sub frmSwizzler_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         Me.WindowState = FormWindowState.Normal
         If temp_image > -1 Then
@@ -814,79 +817,141 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         attache_RGBA_FBO(temp_image)
         Gl.glDrawBuffers(2, drawbuffer0(0))
         ViewOrtho2(sImageWidth, -sImageHeight)
+        If m_shperical_cb.Checked Then
+            ViewOrthoSphere(2, -2)
+        Else
+            ViewOrtho2(sImageWidth, -sImageHeight)
+
+        End If
         Dim e = Gl.glGetError
 
         Gl.glClearColor(0.0, 0.0, 0.0, 1.0)
         Gl.glClear(Gl.GL_COLOR_BUFFER_BIT Or Gl.GL_DEPTH_BUFFER_BIT)
         Gl.glDisable(Gl.GL_BLEND)
         Gl.glDisable(Gl.GL_LIGHTING)
+        Gl.glDisable(Gl.GL_DEPTH_TEST)
         Gl.glEnable(Gl.GL_TEXTURE_2D)
-        If Not GenMask_cb.Checked Then
-            ' use swizzler
-            Gl.glUseProgram(swizzler_pgm)
+        If Not m_shperical_cb.Checked Then
+            If Not GenMask_cb.Checked Then
+                ' use swizzler
+                Gl.glUseProgram(swizzler_pgm)
 
-            Gl.glUniform1i(color_in, 0)
-            Gl.glUniform1i(color_out, 1)
-            Gl.glUniform1i(sw_mask_location, 2)
-            Gl.glUniform1i(r_mask, R_)
-            Gl.glUniform1i(g_mask, G_)
-            Gl.glUniform1i(b_mask, B_)
-            Gl.glUniform1i(a_mask, A_)
-            Gl.glUniform1i(sw_mask_function, mask_function)
-            Gl.glUniform1f(sw_mask_mix, CSng(TrackBar1.Value / 100.0!))
-            Gl.glUniform1i(sw_blend_alpha, use_alpha_blend)
-            If m_flip_x_cb.Checked Then
-                Gl.glUniform1i(sw_flip_x, 1)
-            Else
-                Gl.glUniform1i(sw_flip_x, 0)
-            End If
-            If m_flip_y_cb.Checked Then
-                Gl.glUniform1i(sw_flip_y, 1)
-            Else
-                Gl.glUniform1i(sw_flip_y, 0)
-            End If
-            If convert_rgb_NM_cb.Checked Then
-                Gl.glUniform1i(convert_rgb_NM, 1)
-            Else
-                Gl.glUniform1i(convert_rgb_NM, 0)
-            End If
+                Gl.glUniform1i(color_in, 0)
+                Gl.glUniform1i(color_out, 1)
+                Gl.glUniform1i(sw_mask_location, 2)
+                Gl.glUniform1i(r_mask, R_)
+                Gl.glUniform1i(g_mask, G_)
+                Gl.glUniform1i(b_mask, B_)
+                Gl.glUniform1i(a_mask, A_)
+                Gl.glUniform1i(sw_mask_function, mask_function)
+                Gl.glUniform1f(sw_mask_mix, CSng(TrackBar1.Value / 100.0!))
+                Gl.glUniform1i(sw_blend_alpha, use_alpha_blend)
+                If m_flip_x_cb.Checked Then
+                    Gl.glUniform1i(sw_flip_x, 1)
+                Else
+                    Gl.glUniform1i(sw_flip_x, 0)
+                End If
+                If m_flip_y_cb.Checked Then
+                    Gl.glUniform1i(sw_flip_y, 1)
+                Else
+                    Gl.glUniform1i(sw_flip_y, 0)
+                End If
+                If convert_rgb_NM_cb.Checked Then
+                    Gl.glUniform1i(convert_rgb_NM, 1)
+                Else
+                    Gl.glUniform1i(convert_rgb_NM, 0)
+                End If
 
-            If mask_cb.Checked Then
-                Gl.glUniform1i(sw_use_mask, 1)
-                Gl.glUniform1i(sw_mask_channels, mask_value)
+                If mask_cb.Checked Then
+                    Gl.glUniform1i(sw_use_mask, 1)
+                    Gl.glUniform1i(sw_mask_channels, mask_value)
+
+                Else
+                    Gl.glUniform1i(sw_use_mask, 0)
+                End If
+                If fill_alpha_cb.Checked Then
+                    Gl.glUniform1i(sw_use_alpha_fill, 1)
+                    Gl.glUniform1f(sw_alpha_value, alpha_percent)
+
+                Else
+                    Gl.glUniform1i(sw_use_alpha_fill, 0)
+                End If
+                If multiply_cb.Checked Then
+                    Gl.glUniform1i(sw_multiply, 1)
+                Else
+                    Gl.glUniform1i(sw_multiply, 0)
+                End If
+
+                e = Gl.glGetError
+                Gl.glActiveTexture(Gl.GL_TEXTURE0)
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
+                Gl.glActiveTexture(Gl.GL_TEXTURE0 + 1)
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image2)
+                Gl.glActiveTexture(Gl.GL_TEXTURE0 + 2)
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, mask_texture)
+
 
             Else
-                Gl.glUniform1i(sw_use_mask, 0)
+                ' use maskgen_pgm pgm
+                Gl.glUseProgram(maskgen_pgm)
+                Gl.glUniform1i(mg_color, 0)
+                Gl.glActiveTexture(Gl.GL_TEXTURE0)
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
             End If
-            If fill_alpha_cb.Checked Then
-                Gl.glUniform1i(sw_use_alpha_fill, 1)
-                Gl.glUniform1f(sw_alpha_value, alpha_percent)
-
-            Else
-                Gl.glUniform1i(sw_use_alpha_fill, 0)
-            End If
-            If multiply_cb.Checked Then
-                Gl.glUniform1i(sw_multiply, 1)
-            Else
-                Gl.glUniform1i(sw_multiply, 0)
-            End If
-
-            e = Gl.glGetError
-            Gl.glActiveTexture(Gl.GL_TEXTURE0)
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
-            Gl.glActiveTexture(Gl.GL_TEXTURE0 + 1)
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, temp_image2)
-            Gl.glActiveTexture(Gl.GL_TEXTURE0 + 2)
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, mask_texture)
-
         Else
-            ' use maskgen_pgm pgm
-            Gl.glUseProgram(maskgen_pgm)
-            Gl.glUniform1i(mg_color, 0)
+            'Gl.glDisable(Gl.GL_TEXTURE_2D)
+            Gl.glUseProgram(spherical_pgm)
+            Gl.glUniform1i(spherical_color, 0)
+            Gl.glUniform2f(spherical_textsize, sImageWidth, sImageHeight)
+
             Gl.glActiveTexture(Gl.GL_TEXTURE0)
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, current_texture_swizz)
-        End If
 
+            Dim Iw As Single = sImageWidth
+            Dim Ih As Single = sImageHeight
+
+            Dim PI2 = PI * 2.0
+            Dim Rx, Ry As Single
+            Dim N1 As vec3
+            Dim u1, v1 As Single
+
+            Gl.glPointSize(1.0)
+            Gl.glBegin(Gl.GL_POINTS)
+
+            Dim div As Single = 4.0! ' number of longitude slices
+            Dim ss As Single = Iw / div ' step size on x
+            Dim ws As Single = -ss / 2.0 'width start
+            Dim we As Single = ss / 2.0 ' width end
+
+            For Py As Single = 0 To Ih Step 1.0
+                For Px As Single = ss To Iw Step ss
+                    Dim cntr As Single = Px - we
+                    For w As Single = ws To we Step 1.0
+                        Rx = (((Px + w + ws) / Iw) - 0.5) * PI2 ' PI * 2
+                        Ry = ((Py / Ih) - 0.5) * PI
+
+                        u1 = (Px + w + ws) / Iw ' 0 to 1 across Iw
+                        v1 = ((Py / Ih))
+
+                        'create spherical normal
+                        N1.x = Cos(Rx) * Cos(Ry)
+                        N1.y = Sin(Ry)
+                        N1.z = Sin(Rx) * Cos(Ry)
+
+                        Gl.glMultiTexCoord2f(0, u1, v1) ' U,V
+                        Gl.glMultiTexCoord2f(1, Px - we, w) ' parallel, wpos
+                        Gl.glNormal3f(N1.x, N1.y, N1.z) ' spherical normal
+                        ' Position is never used in shader but
+                        ' we most trigger the draw call.
+                        Gl.glVertex3f(N1.x, N1.y, N1.z)
+                    Next
+                Next
+            Next
+            Gl.glEnd()
+
+            Gl.glEnable(Gl.GL_TEXTURE_2D)
+            GoTo finish
+        End If
         Gl.glColor4f(0.5, 0.5, 0.5, 0.0)
         Gl.glBegin(Gl.GL_QUADS)
         Gl.glTexCoord2f(0.0, 0.0)
@@ -902,6 +967,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Gl.glVertex3f(sImageWidth, sImageHeight, -0.1)
 
         Gl.glEnd()
+finish:
         Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
         Gl.glActiveTexture(Gl.GL_TEXTURE0)
         Gl.glBindTexture(Gl.GL_TEXTURE_2D, 0)
@@ -913,7 +979,6 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         _printing = False
         'draw(True)
     End Sub
-
     Public Sub scale_up_btn_Click(sender As Object, e As EventArgs) Handles scale_up_btn.Click
         If _printing Then Return
         If _printing Then Return
@@ -1713,4 +1778,8 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     End Sub
 
 
+    Private Sub m_shperical_cb_CheckedChanged(sender As Object, e As EventArgs) Handles m_shperical_cb.CheckedChanged
+        If Not _Started Then Return
+        draw(True)
+    End Sub
 End Class

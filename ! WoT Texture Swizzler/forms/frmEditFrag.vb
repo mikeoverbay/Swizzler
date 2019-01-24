@@ -40,6 +40,7 @@ Public Class frmEditFrag
         CB1.Items.Add("swizzler")
         CB1.Items.Add("maskGen")
         CB1.Items.Add("combiner")
+        CB1.Items.Add("spherical")
         recompile_bt.Enabled = False
 		Me.Text = "Shader Editor:"
 		ct = vert_tb
@@ -89,7 +90,11 @@ Public Class frmEditFrag
             Case 3
                 Gl.glDeleteShader(combiner_pgm)
                 combiner_pgm = build_shader(vs3, fs3, combiner_pgm, "combiner_pgm")
+            Case 4
+                Gl.glDeleteShader(spherical_pgm)
+                spherical_pgm = build_shader(vs3, fs3, spherical_pgm, "spherical_pgm")
         End Select
+        set_uniforms()
 		Gl.glFinish()
 
         frmMain.draw(True)

@@ -1,6 +1,23 @@
 # Swizzler
 A tool to help skin World of Tanks.. Tanks
 
+##
+Swizzler is written in VB.net managed code.
+It uses OpenGL to render and modify the textures.
+
+It supports DDS, PNG, JPG and BMP image files.
+I wrote this as a tool for World of Tank modding but it is useful for working with images for other purposes.
+
+
+<a href="https://youtu.be/1HXSy-03OJA">Youtube Video showing how to use the tool. </a>
+
+In order to shut off a color channel.
+Double click on the color name Red, Green, Blue or alpha.
+
+### Version 12
+Created diagram of how Swizzler routing works.
+Use the help file to see it.
+
 ### Version 11
 Fixed a bug with disabling and reseting the channels
 

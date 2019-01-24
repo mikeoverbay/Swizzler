@@ -4,6 +4,8 @@ Imports Tao.OpenGl
 Imports Tao.Platform.Windows
 
 Module GL_ShaderLoader
+    Public spherical_pgm As Integer
+    Public spherical_color, spherical_textsize, spherical_parallel, spherical_w, spherical_ss As Integer
     Public color_pgm As Integer
     Public swizzler_pgm As Integer
     Public maskgen_pgm As Integer
@@ -58,11 +60,24 @@ Module GL_ShaderLoader
         Dim fs11() As String = {New StreamReader(ap + "combiner_fragment.glsl").ReadToEnd}
         combiner_pgm = build_shader(vs11, fs11, combiner_pgm, "combiner_pgm")
 
+        'Dim vs12() As String = {New StreamReader(ap + "Spherical_vertex.glsl").ReadToEnd}
+        'Dim fs12() As String = {New StreamReader(ap + "Spherical_fragment.glsl").ReadToEnd}
+        'spherical_pgm = build_shader(vs12, fs12, spherical_pgm, "spherical_pgm")
+
         Gl.glFinish() '<-- Make sure all shaders are done compiling. Not sure this is a real issue.
 
+        set_uniforms()
+
+
+    End Sub
+    Public Sub set_uniforms()
         '/////////////////////
         ' setup uniforms
         '////////////////////
+        '==========================================================================================
+        'spherical_color = Gl.glGetUniformLocation(spherical_pgm, "txr")
+        'spherical_textsize = Gl.glGetUniformLocation(spherical_pgm, "size")
+        '==========================================================================================
         c_address = Gl.glGetUniformLocation(color_pgm, "colorMap")
         mask = Gl.glGetUniformLocation(color_pgm, "mask")
         '==========================================================================================
@@ -103,7 +118,6 @@ Module GL_ShaderLoader
         comb_b_level = Gl.glGetUniformLocation(combiner_pgm, "b_level")
         comb_a_level = Gl.glGetUniformLocation(combiner_pgm, "a_level")
 
-
     End Sub
     Public Function build_shader(vs() As String, fs() As String, shader As Integer, name As String) As Integer
         Dim vertexObject, fragmentObject, status_code As Integer
@@ -139,7 +153,7 @@ Module GL_ShaderLoader
             Return -1
         End If
         If Gl.glIsProgram(shader) Then
-            Gl.glDeleteShader(shader)
+            Gl.glDeleteProgram(shader)
         End If
         shader = Gl.glCreateProgram()
         Gl.glAttachShader(shader, fragmentObject)
@@ -153,8 +167,11 @@ Module GL_ShaderLoader
             MsgBox(name + "  did not Link!", MsgBoxStyle.Exclamation)
 
         End If
+        Gl.glDetachShader(shader, fragmentObject)
+        Gl.glDetachShader(shader, vertexObject)
         Gl.glDeleteShader(fragmentObject)
         Gl.glDeleteShader(vertexObject)
+
         Return shader
     End Function
 End Module

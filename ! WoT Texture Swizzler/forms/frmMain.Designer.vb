@@ -25,6 +25,7 @@ Partial Class frmMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.top_panel = New System.Windows.Forms.Panel()
+        Me.m_shperical_cb = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.m_flip_x_cb = New System.Windows.Forms.CheckBox()
         Me.m_flip_y_cb = New System.Windows.Forms.CheckBox()
@@ -119,6 +120,7 @@ Partial Class frmMain
         '
         Me.top_panel.BackColor = System.Drawing.Color.Silver
         Me.top_panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.top_panel.Controls.Add(Me.m_shperical_cb)
         Me.top_panel.Controls.Add(Me.Panel2)
         Me.top_panel.Controls.Add(Me.quater_cb)
         Me.top_panel.Controls.Add(Me.reset_btn)
@@ -147,6 +149,18 @@ Partial Class frmMain
         Me.top_panel.Name = "top_panel"
         Me.top_panel.Size = New System.Drawing.Size(873, 105)
         Me.top_panel.TabIndex = 1
+        '
+        'm_shperical_cb
+        '
+        Me.m_shperical_cb.AutoSize = True
+        Me.m_shperical_cb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.m_shperical_cb.Location = New System.Drawing.Point(650, 49)
+        Me.m_shperical_cb.Name = "m_shperical_cb"
+        Me.m_shperical_cb.Size = New System.Drawing.Size(107, 17)
+        Me.m_shperical_cb.TabIndex = 31
+        Me.m_shperical_cb.Text = "Spherical Map"
+        Me.m_shperical_cb.UseVisualStyleBackColor = True
+        Me.m_shperical_cb.Visible = False
         '
         'Panel2
         '
@@ -1084,4 +1098,5 @@ Partial Class frmMain
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents m_flip_x_cb As System.Windows.Forms.CheckBox
     Friend WithEvents m_flip_y_cb As System.Windows.Forms.CheckBox
+    Friend WithEvents m_shperical_cb As System.Windows.Forms.CheckBox
 End Class

@@ -55,6 +55,16 @@ Module modOpenGL
     '    Gl.glMatrixMode(Gl.GL_MODELVIEW)    ';					// Select Modelview
     '    Gl.glLoadIdentity() ';						// Reset The Matrix
     'End Sub
+    Public Sub ViewOrthoSphere(ByVal width As Integer, ByVal height As Integer)
+        Gl.glViewport(0, 0, width, height)
+
+        Gl.glMatrixMode(Gl.GL_PROJECTION) ';					// Select Projection
+        Gl.glLoadIdentity() ';						// Reset The Matrix
+        Gl.glOrtho(-width / 2.0, width / 2.0, -height / 2.0, height / 2.0, 50.0, -100.0)
+
+        Gl.glMatrixMode(Gl.GL_MODELVIEW)    ';					// Select Modelview Matrix
+        Gl.glLoadIdentity() ';						// Reset The Matrix
+    End Sub
     Public Sub ViewOrtho2(ByVal width As Integer, ByVal height As Integer)
         Gl.glViewport(0, 0, width, height)
 
