@@ -166,19 +166,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A991C897B61FA7B3E500178D86CF03AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,7 +178,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
+        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CE2057D825CFCB96D4697E055949347A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A991C897B61FA7B3E500178D86CF03AB"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -233,7 +233,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Swizzler_Setup_011.msi"
+        "OutputFilename" = "8:..\\Swizzler_Setup_012.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
