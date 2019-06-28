@@ -117,23 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>World of Tanks uses 2 DDS formats.
-
-DDS BC1 :  RGB 4 bits per pixel no alpha
-DDS BC3 : ARGB 8 bits per pixel explicit alpha
-And for info...
-DDS BC5 : ARGB 8 bits per pixel interpolated alpha
-
-
-AM  maps are BC1   Color Map
+  <data name="RichTextBox1.Text" xml:space="preserve">
+    <value>AM  maps are BC1   Color Map
 AMN maps are BC3   Normal Map
 A0  maps are BC3   Ambient Occlusion and camo mask(alpha channel)
 GMM maps are BC1   Metal, roughness and refection map
 
-HD maps have NO Mip Maps. They are a single texture
-SD maps must have Mip Maps. They contain up to 10 sub textures.
-Each being 1/2 the size of the previous textures size.
+HD maps have NO Mip Maps. They are a single texture.
+HD maps are 2x larger on width and length than SD maps.
+
+SD maps must have Mip Maps. They contain many sub textures.
+Each being 1/2 the width and heigth of the previous textures size.
 
 You can find info about MipMaps here...
 https://en.wikipedia.org/wiki/Mipmap</value>

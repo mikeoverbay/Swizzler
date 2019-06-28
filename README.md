@@ -1,5 +1,6 @@
 # Swizzler
-A tool to help skin World of Tanks.. Tanks
+A tool to help skin World of Tanks.. Tanks.
+Usefull for other game textures as well.
 
 ##
 Swizzler is written in VB.net managed code.
@@ -13,6 +14,12 @@ I wrote this as a tool for World of Tank modding but it is useful for working wi
 
 In order to shut off a color channel.
 Double click on the color name Red, Green, Blue or alpha.
+
+### Version 13
+Updated Help Info. It is now a logic diagram.
+Updated shortcut location moved to the Coffee_ Folder.
+Updated Texture Help Screen for writing files.
+
 
 ### Version 12
 Created diagram of how Swizzler routing works.

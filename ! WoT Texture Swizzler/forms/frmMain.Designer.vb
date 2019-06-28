@@ -879,6 +879,7 @@ Partial Class frmMain
         '
         'm_save
         '
+        Me.m_save.Enabled = False
         Me.m_save.Name = "m_save"
         Me.m_save.Size = New System.Drawing.Size(167, 22)
         Me.m_save.Text = "Save"

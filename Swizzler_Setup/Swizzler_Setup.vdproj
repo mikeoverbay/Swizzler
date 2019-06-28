@@ -166,19 +166,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F95FB012C8F9BB67B2896771B880C4D8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "OwnerKey" = "8:_A991C897B61FA7B3E500178D86CF03AB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,7 +178,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A991C897B61FA7B3E500178D86CF03AB"
+        "OwnerKey" = "8:_A6354193EFF508F898EBA691E620B7AF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F95FB012C8F9BB67B2896771B880C4D8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CC7B016703EA290B24673BA9E63BE59A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -233,7 +233,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:..\\Swizzler_Setup_012.msi"
+        "OutputFilename" = "8:..\\Swizzler_Setup_013.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -823,6 +823,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F48D5E4720024A9787E33DA9FB854FA8"
+                    {
+                    "Name" = "8:Coffee_"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_DB8BCDBB2E994B93AE62CB83897FBE24"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_96E3E636F82A47ADBB4A5358F5A8F4FB"
@@ -852,15 +863,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Swizzler"
-        "ProductCode" = "8:{BFA2CA98-45B4-4887-BB4D-9424406DBEFB}"
-        "PackageCode" = "8:{7FB19129-6E00-4AA2-80F4-C58F39F06EF7}"
+        "ProductCode" = "8:{0750BFA3-E564-4481-84DF-B4902B441A27}"
+        "PackageCode" = "8:{768C1DBC-245A-4127-BDCE-A5D1EE6A847C}"
         "UpgradeCode" = "8:{2F5CB7E8-E9B8-4311-B488-091FA5184B6E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.12"
+        "ProductVersion" = "8:1.0.13"
         "Manufacturer" = "8:Coffee_"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -982,7 +993,7 @@
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_D14F41356AD54D3DA261A5FD69C9E49D"
-            "Folder" = "8:_4BEC6C6CAE6F4ABCB4631DF8CA8FDD1C"
+            "Folder" = "8:_F48D5E4720024A9787E33DA9FB854FA8"
             "WorkingFolder" = "8:_2BCFD5A8EB1349B48B651D421E09CD63"
             "Icon" = "8:_136031058828432FA156BB06461247F0"
             "Feature" = "8:"

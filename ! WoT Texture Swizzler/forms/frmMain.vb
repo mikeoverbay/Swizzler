@@ -569,6 +569,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             End If
             create_temp_image()
             create_temp2()
+            m_save.Enabled = True
         End If
         MenuStrip.Enabled = True
         pb3.Width = Me.ClientSize.Width - Panel1.Width

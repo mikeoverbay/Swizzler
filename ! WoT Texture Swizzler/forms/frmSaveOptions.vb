@@ -27,6 +27,10 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        texture_help.ShowDialog()
+        If texture_help.Visible Then
+            texture_help.Close()
+        Else
+            texture_help.Show()
+        End If
     End Sub
 End Class
