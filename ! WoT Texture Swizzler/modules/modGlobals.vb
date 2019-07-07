@@ -12,7 +12,7 @@
     Public M_B_ As Integer = 4
     Public M_A_ As Integer = 8
 
-
+    Public Temp_Storage As String
     Public temp_image As Integer = -1
     Public temp_image2 As Integer = -1
 

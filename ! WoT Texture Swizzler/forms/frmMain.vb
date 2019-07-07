@@ -61,7 +61,7 @@ Public Class frmMain
 #End Region
 
 
-
+    Dim opened_file_name As String
     Private Sub frmSwizzler_Load(sender As Object, e As EventArgs) Handles Me.Load
         EnableOpenGL()
 
@@ -108,6 +108,32 @@ Public Class frmMain
 
         _Started = True
         ComboBox1.SelectedIndex = 10
+
+        Temp_Storage = Path.GetTempPath ' this gets the user temp storage folder
+        Temp_Storage += "swizzler_temp"
+        If Not System.IO.Directory.Exists(Temp_Storage) Then
+            System.IO.Directory.CreateDirectory(Temp_Storage)
+        End If
+
+
+        Dim arguments() As String = Environment.GetCommandLineArgs()
+        Dim fs As String = ""
+        If arguments IsNot Nothing Then
+            For i = 0 To arguments.Length - 1
+                fs += arguments(i) + vbCrLf
+            Next
+            If arguments.Length > 1 Then
+                Dim s1 = arguments(1)
+                If s1 <> String.Empty Then
+                    opened_file_name = s1
+                    Me.Text = "File: " + opened_file_name
+                    'IO.File.WriteAllText("C:\temp_\test.txt", fs + vbCrLf + "Made it")
+                    open_command_line(s1)
+                End If
+            End If
+
+        End If
+
     End Sub
     Private Sub load_model()
         'sphere_model = get_X_model(Application.StartupPath + "\models\cylinder.x")
@@ -539,14 +565,56 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Dim s As String = Application.StartupPath
         System.Diagnostics.Process.Start(s + "\HTML files\help.html")
     End Sub
+    Private Sub open_command_line(source_filename As String)
+        Dim tfp As String = "C:\"
+        If File.Exists(Temp_Storage + "\folder_path.txt") Then
+            tfp = File.ReadAllText(Temp_Storage + "\folder_path.txt")
+        End If
+        Me.Text = "RGBA Channel Swizzler - File: " + source_filename
+        Gl.glDeleteTextures(1, current_texture_swizz)
+        Gl.glFinish()
+        current_texture_swizz = -1
+        current_texture_swizz = load_image(source_filename, True)
+        File.WriteAllText(Temp_Storage + "\folder_path.txt", source_filename)
+        If current_texture_swizz = -1 Then
+            MsgBox("Could not open " + vbCrLf + source_filename, MsgBoxStyle.Exclamation, "File IO Error...")
+            current_texture_swizz = -1
+            source_filename = "No File"
+            Me.Text = "No file"
+            draw(True)
+        End If
+        If temp_image > 0 Then
+            Gl.glDeleteTextures(1, temp_image)
+            Gl.glFinish()
+        End If
+        If temp_image2 > 0 Then
+            Gl.glDeleteTextures(1, temp_image2)
+            Gl.glFinish()
+        End If
+        create_temp_image()
+        create_temp2()
+        m_save.Enabled = True
+        MenuStrip.Enabled = True
+        pb3.Width = Me.ClientSize.Width - Panel1.Width
+        pb3.Height = Me.ClientSize.Height - (Me.MenuStrip.Height + Me.top_panel.Height)
+        pb3.Location = New Point(Panel1.Width, Me.MenuStrip.Height + Me.top_panel.Height)
+        sBox.location = New Point((pb3.Width - sBox.Width) / 2, (pb3.Height - sBox.Height) / 2)
+        rect_location = sBox.location
+        draw(True)
 
+    End Sub
     Private Sub m_open_Click(sender As Object, e As EventArgs) Handles m_open.Click
         MenuStrip.Enabled = False
         OpenFileDialog1.Title = "Load Image"
         OpenFileDialog1.Filter = "DDS (DXT) (*.dds)|*.dds|PNG (*.png)|*.png|BMP (*.bmp)|*.bmp|JPG (*.jpg)|*.jpg"
-
+        Dim tfp As String = "C:\"
+        If File.Exists(Temp_Storage + "\folder_path.txt") Then
+            tfp = File.ReadAllText(Temp_Storage + "\folder_path.txt")
+        End If
+        OpenFileDialog1.InitialDirectory = Path.GetDirectoryName(tfp)
         If OpenFileDialog1.ShowDialog = Forms.DialogResult.OK Then
             source_filename = OpenFileDialog1.FileName
+            File.WriteAllText(Temp_Storage + "\folder_path.txt", source_filename)
             Me.Text = "RGBA Channel Swizzler - File: " + source_filename
             Gl.glDeleteTextures(1, current_texture_swizz)
             Gl.glFinish()
@@ -577,9 +645,6 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         pb3.Location = New Point(Panel1.Width, Me.MenuStrip.Height + Me.top_panel.Height)
         sBox.location = New Point((pb3.Width - sBox.Width) / 2, (pb3.Height - sBox.Height) / 2)
         rect_location = sBox.location
-        If convert_rgb_NM_cb.Checked Then
-            'render_to_temp_image()
-        End If
         draw(True)
     End Sub
     Dim mask_texture As Integer = -1

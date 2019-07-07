@@ -15,6 +15,10 @@ I wrote this as a tool for World of Tank modding but it is useful for working wi
 In order to shut off a color channel.
 Double click on the color name Red, Green, Blue or alpha.
 
+### Version 14
+You can now associate DDS, PNG and JPG files to open in Swizzler when you DBL click them in File Explorer.</br>
+Fixed how Alpha is displayed when its the only channel set as visible.
+
 ### Version 13
 Updated Help Info. It is now a logic diagram.
 Updated shortcut location moved to the Coffee_ Folder.

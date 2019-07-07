@@ -13,6 +13,7 @@ void main()
     color.b *= mask.b;
     color.a *= mask.a;
     if ( mask.a == 0.0 ){ color.a = 1.0; }
+	if ( length(mask.rgb) == 0.0) color.rgb = vec3(1.0);
     gl_FragColor = color;
 }           
     
