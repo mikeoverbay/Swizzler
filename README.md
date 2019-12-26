@@ -15,6 +15,9 @@ I wrote this as a tool for World of Tank modding but it is useful for working wi
 In order to shut off a color channel.
 Double click on the color name Red, Green, Blue or alpha.
 
+### Version 15
+This stops Swizzler from forgetting where a program was loaded from when loaded by assigned file type.
+
 ### Version 14
 You can now associate DDS, PNG and JPG files to open in Swizzler when you DBL click them in File Explorer.</br>
 Fixed how Alpha is displayed when its the only channel set as visible.

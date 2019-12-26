@@ -1,5 +1,4 @@
-﻿#Region "imports"
-Imports System.Windows
+﻿Imports System.Windows
 Imports System.Windows.Forms
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
@@ -18,7 +17,6 @@ Imports System.Math
 Imports System.Object
 Imports System.Threading
 Imports System.Data
-#End Region
 
 
 Public Class frmMain
@@ -61,7 +59,6 @@ Public Class frmMain
 #End Region
 
 
-    Dim opened_file_name As String
     Private Sub frmSwizzler_Load(sender As Object, e As EventArgs) Handles Me.Load
         EnableOpenGL()
 
@@ -125,10 +122,12 @@ Public Class frmMain
             If arguments.Length > 1 Then
                 Dim s1 = arguments(1)
                 If s1 <> String.Empty Then
-                    opened_file_name = s1
-                    Me.Text = "File: " + opened_file_name
+                    source_filename = s1
+                    destination_filename = s1
+                    SaveFileDialog1.FileName = s1
+                    Me.Text = "File: " + source_filename
                     'IO.File.WriteAllText("C:\temp_\test.txt", fs + vbCrLf + "Made it")
-                    open_command_line(s1)
+                    open_command_line()
                 End If
             End If
 
@@ -565,7 +564,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
         Dim s As String = Application.StartupPath
         System.Diagnostics.Process.Start(s + "\HTML files\help.html")
     End Sub
-    Private Sub open_command_line(source_filename As String)
+    Private Sub open_command_line()
         Dim tfp As String = "C:\"
         If File.Exists(Temp_Storage + "\folder_path.txt") Then
             tfp = File.ReadAllText(Temp_Storage + "\folder_path.txt")
@@ -619,6 +618,16 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             Gl.glDeleteTextures(1, current_texture_swizz)
             Gl.glFinish()
             current_texture_swizz = -1
+            'debug to dump header info as byte array
+            'Dim buf = File.ReadAllBytes(source_filename)
+            'Debug.Write("{ ")
+            'For i = 0 To 3
+            '    For k = 0 To 31
+            '        Debug.Write("&h" + buf((i * 32) + k).ToString("X00000000") + ", ")
+            '    Next
+            '    Debug.WriteLine(" _")
+            'Next
+            'Debug.Write("} ")
             current_texture_swizz = load_image(source_filename, True)
             If current_texture_swizz = -1 Then
                 MsgBox("Could not open " + vbCrLf + source_filename, MsgBoxStyle.Exclamation, "File IO Error...")
@@ -663,7 +672,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
             mask_texture = -1
             mask_texture = load_image(mask_filename, False)
             If mask_texture = -1 Then
-                MsgBox("Could not open " + vbCrLf + source_filename, MsgBoxStyle.Exclamation, "File IO Error...")
+                MsgBox("Could not open " + vbCrLf + mask_filename, MsgBoxStyle.Exclamation, "File IO Error...")
                 mask_texture = -1
                 mask_filename = "No Mask File"
                 mask_tb.Text = "No Mask file"
