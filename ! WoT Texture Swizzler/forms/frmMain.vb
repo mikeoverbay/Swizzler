@@ -1013,6 +1013,8 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
                         N1.y = Sin(Ry)
                         N1.z = Sin(Rx) * Cos(Ry)
 
+                        Gl.glTexCoord2f(u1, v1) ' U,V
+
                         Gl.glMultiTexCoord2f(0, u1, v1) ' U,V
                         Gl.glMultiTexCoord2f(1, Px - we, w) ' parallel, wpos
                         Gl.glNormal3f(N1.x, N1.y, N1.z) ' spherical normal

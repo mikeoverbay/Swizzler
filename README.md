@@ -15,6 +15,10 @@ I wrote this as a tool for World of Tank modding but it is useful for working wi
 In order to shut off a color channel.
 Double click on the color name Red, Green, Blue or alpha.
 
+### Version 16
+Added missing gltexcoord2f that some drivers expect.
+
+
 ### Version 15
 This stops Swizzler from forgetting where a program was loaded from when loaded by assigned file type.
 
@@ -26,7 +30,6 @@ Fixed how Alpha is displayed when its the only channel set as visible.
 Updated Help Info. It is now a logic diagram.
 Updated shortcut location moved to the Coffee_ Folder.
 Updated Texture Help Screen for writing files.
-
 
 ### Version 12
 Created diagram of how Swizzler routing works.
