@@ -339,14 +339,22 @@ Public Class frmMain
         Dim w As Single = pb3.Width / 320.0 ' size of the checker board
         Dim h As Single = pb3.Height / 320.0 ' size of the checker board
         'h = h / w
+        Gl.glMultiTexCoord2f(0, 0.0, 0.0)
         Gl.glTexCoord2f(0.0, 0.0)
         Gl.glVertex3f(0.0, 0.0, -0.15)
+
+        Gl.glMultiTexCoord2f(0, 0.0, h)
         Gl.glTexCoord2f(0.0, h)
         Gl.glVertex3f(0.0, -v.Y, -0.15)
+
+        Gl.glMultiTexCoord2f(0, w, h)
         Gl.glTexCoord2f(w, h)
         Gl.glVertex3f(v.X, -v.Y, -0.15)
+
+        Gl.glMultiTexCoord2f(0, w, 0.0)
         Gl.glTexCoord2f(w, 0.0)
         Gl.glVertex3f(v.X, 0.0, -0.15)
+
         Gl.glEnd()
         Gl.glPopMatrix()
         '----------------------------------------
@@ -404,12 +412,19 @@ Public Class frmMain
         'draw and flip bufffers so the user can see the image
         Gl.glBegin(Gl.GL_QUADS)
         '---
+        Gl.glMultiTexCoord2f(0, u1(0), u1(1))
         Gl.glTexCoord2fv(u1)
         Gl.glVertex2f(p1.X, p1.Y)
+
+        Gl.glMultiTexCoord2f(0, u2(0), u2(1))
         Gl.glTexCoord2fv(u2)
         Gl.glVertex2f(p2.X, p2.Y)
+
+        Gl.glMultiTexCoord2f(0, u3(0), u3(1))
         Gl.glTexCoord2fv(u3)
         Gl.glVertex2f(p3.X, p3.Y)
+
+        Gl.glMultiTexCoord2f(0, u4(0), u4(1))
         Gl.glTexCoord2fv(u4)
         Gl.glVertex2f(p4.X, p4.Y)
         '--
