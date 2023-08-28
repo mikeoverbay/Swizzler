@@ -339,19 +339,19 @@ Public Class frmMain
         Dim w As Single = pb3.Width / 320.0 ' size of the checker board
         Dim h As Single = pb3.Height / 320.0 ' size of the checker board
         'h = h / w
-        Gl.glMultiTexCoord2f(0, 0.0, 0.0)
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0.0, 0.0)
         Gl.glTexCoord2f(0.0, 0.0)
         Gl.glVertex3f(0.0, 0.0, -0.15)
 
-        Gl.glMultiTexCoord2f(0, 0.0, h)
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, 0.0, h)
         Gl.glTexCoord2f(0.0, h)
         Gl.glVertex3f(0.0, -v.Y, -0.15)
 
-        Gl.glMultiTexCoord2f(0, w, h)
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, w, h)
         Gl.glTexCoord2f(w, h)
         Gl.glVertex3f(v.X, -v.Y, -0.15)
 
-        Gl.glMultiTexCoord2f(0, w, 0.0)
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, w, 0.0)
         Gl.glTexCoord2f(w, 0.0)
         Gl.glVertex3f(v.X, 0.0, -0.15)
 
@@ -412,19 +412,19 @@ Public Class frmMain
         'draw and flip bufffers so the user can see the image
         Gl.glBegin(Gl.GL_QUADS)
         '---
-        Gl.glMultiTexCoord2f(0, u1(0), u1(1))
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, u1(0), u1(1))
         Gl.glTexCoord2fv(u1)
         Gl.glVertex2f(p1.X, p1.Y)
 
-        Gl.glMultiTexCoord2f(0, u2(0), u2(1))
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, u2(0), u2(1))
         Gl.glTexCoord2fv(u2)
         Gl.glVertex2f(p2.X, p2.Y)
 
-        Gl.glMultiTexCoord2f(0, u3(0), u3(1))
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, u3(0), u3(1))
         Gl.glTexCoord2fv(u3)
         Gl.glVertex2f(p3.X, p3.Y)
 
-        Gl.glMultiTexCoord2f(0, u4(0), u4(1))
+        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, u4(0), u4(1))
         Gl.glTexCoord2fv(u4)
         Gl.glVertex2f(p4.X, p4.Y)
         '--
@@ -519,7 +519,7 @@ Public Class frmMain
 
     End Sub
 
-    Public Sub glutPrint(ByVal x As Single, ByVal y As Single, _
+    Public Sub glutPrint(ByVal x As Single, ByVal y As Single,
 ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, ByVal a As Single)
         If text IsNot Nothing Then
             If text.Length = 0 Then Exit Sub
@@ -532,7 +532,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     End Sub
 
     Public Sub draw_prep()
-        If Not _STARTED Then Return
+        If Not _Started Then Return
         'if we are printing, we cant change this context
         Gl.glClearColor(0.0F, 0.0F, 0.0, 0.0F)
         Gl.glClear(Gl.GL_COLOR_BUFFER_BIT Or Gl.GL_DEPTH_BUFFER_BIT)
@@ -575,7 +575,7 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
 
     Private Sub m_help_Click(sender As Object, e As EventArgs) Handles m_help.Click
-        If Not _STARTED Then Return
+        If Not _Started Then Return
         Dim s As String = Application.StartupPath
         System.Diagnostics.Process.Start(s + "\HTML files\help.html")
     End Sub
@@ -891,11 +891,11 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
     End Sub
 
     Private Sub render_to_temp_image()
-        If current_texture_swizz = -1 Or _
+        If current_texture_swizz = -1 Or
         temp_image = -1 Or temp_image2 = -1 Then
             Return
         End If
-      
+
         create_rgba_FBO(sImageWidth, sImageHeight) 'delete, create and resize fbo
 
         Gl.glBindFramebufferEXT(Gl.GL_RENDERBUFFER_EXT, fboID2)
@@ -1030,8 +1030,8 @@ ByVal text As String, ByVal r As Single, ByVal g As Single, ByVal b As Single, B
 
                         Gl.glTexCoord2f(u1, v1) ' U,V
 
-                        Gl.glMultiTexCoord2f(0, u1, v1) ' U,V
-                        Gl.glMultiTexCoord2f(1, Px - we, w) ' parallel, wpos
+                        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE0, u1, v1) ' U,V
+                        Gl.glMultiTexCoord2f(Gl.GL_TEXTURE1, Px - we, w) ' parallel, wpos
                         Gl.glNormal3f(N1.x, N1.y, N1.z) ' spherical normal
                         ' Position is never used in shader but
                         ' we most trigger the draw call.
